@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { goToOurStory } from '../../../utils/navigation';
 
 export const Hero = () => {
   return (
@@ -33,6 +34,7 @@ export const Hero = () => {
               </motion.p>
               
               <motion.button
+                onClick={goToOurStory}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}

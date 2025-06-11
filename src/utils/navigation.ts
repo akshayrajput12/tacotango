@@ -2,6 +2,8 @@
 export const navigateTo = (path: string) => {
   window.history.pushState(null, '', path);
   window.dispatchEvent(new PopStateEvent('popstate'));
+  // Scroll to top when navigating to a new page
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 // Navigation routes

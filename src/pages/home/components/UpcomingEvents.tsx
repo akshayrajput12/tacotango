@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { goToReservation } from '../../../utils/navigation';
+import { goToEvents } from '../../../utils/navigation';
 
 export const UpcomingEvents = () => {
   return (
@@ -65,6 +65,7 @@ export const UpcomingEvents = () => {
                 </div>
 
                 <motion.button
+                  onClick={goToEvents}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-6 sm:py-3 sm:px-8 rounded-full transition-all duration-200 shadow-lg text-sm sm:text-base"
@@ -125,12 +126,12 @@ export const UpcomingEvents = () => {
                 </div>
 
                 <motion.button
-                  onClick={goToReservation}
+                  onClick={goToEvents}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-6 sm:py-3 sm:px-8 rounded-full transition-all duration-200 shadow-lg text-sm sm:text-base"
                 >
-                  Book Now
+                  Learn More
                 </motion.button>
               </motion.div>
             </div>
@@ -140,6 +141,7 @@ export const UpcomingEvents = () => {
         {/* View All Events Button */}
         <div className="flex justify-center mt-8">
           <motion.button
+            onClick={goToEvents}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}

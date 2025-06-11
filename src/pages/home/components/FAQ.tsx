@@ -18,7 +18,7 @@ export const FAQ = ({ onViewFAQs }: FAQProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6"
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6"
           style={{ fontFamily: 'Raleway, sans-serif' }}
         >
           Frequently Asked Questions
@@ -29,7 +29,7 @@ export const FAQ = ({ onViewFAQs }: FAQProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-8 max-w-4xl"
+          className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl mb-8"
           style={{ fontFamily: 'Lato, sans-serif' }}
         >
           Have questions about our menu, reservations, or events? Find answers to common inquiries and get the information you need to make the most of your visit to Cafex.

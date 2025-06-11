@@ -18,7 +18,7 @@ export const AboutUs = ({ onLearnMore }: AboutUsProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6"
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6"
           style={{ fontFamily: 'Raleway, sans-serif' }}
         >
           About Us
@@ -29,7 +29,7 @@ export const AboutUs = ({ onLearnMore }: AboutUsProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed mb-8 max-w-3xl"
+          className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl mb-8"
           style={{ fontFamily: 'Lato, sans-serif' }}
         >
           The Daily Grind is more than just a cafe; it's a community hub where coffee lovers and food enthusiasts come together. Our journey began with a simple idea: to create a space where quality coffee meets a warm, inviting atmosphere. Learn more about our mission, values, and the team behind your favorite brews.
