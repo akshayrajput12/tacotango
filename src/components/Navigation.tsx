@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { goHome, goToReservation, goToOurStory, goToGallery, goToEvents } from '../utils/navigation';
+import logoImage from '../assets/logo.png';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,17 +9,37 @@ export const Navigation = () => {
   const navItems = ['Our Story', 'Menu', 'Events', 'Gallery'];
 
   const handleHomeClick = () => {
-    window.location.hash = 'home';
+    goHome();
     setIsOpen(false); // Close mobile menu if open
   };
 
   const handleBookTableClick = () => {
-    window.location.hash = 'reservation';
+    goToReservation();
+    setIsOpen(false); // Close mobile menu if open
+  };
+
+  const handleNavItemClick = (item: string) => {
+    if (item === 'Our Story') {
+      goToOurStory();
+    } else if (item === 'Gallery') {
+      goToGallery();
+    } else if (item === 'Events') {
+      goToEvents();
+    }
+    // Add other navigation handlers here as needed
     setIsOpen(false); // Close mobile menu if open
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200">
+    <>
+      {/* Custom CSS for logo cursor */}
+      <style>{`
+        .logo-cursor:hover {
+          cursor: url('${logoImage}') 16 16, pointer !important;
+        }
+      `}</style>
+
+      <nav className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -26,11 +48,11 @@ export const Navigation = () => {
               onClick={handleHomeClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-3 transition-all duration-200"
+              className="flex items-center space-x-3 transition-all duration-200 logo-cursor"
             >
               {/* Logo Image */}
               <img
-                src="/src/assets/logo.png"
+                src={logoImage}
                 alt="Cafex Logo"
                 className="w-8 h-8 object-contain"
               />
@@ -43,13 +65,13 @@ export const Navigation = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item}
-                href="#"
-                className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors duration-200"
+                onClick={() => handleNavItemClick(item)}
+                className="text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors duration-200 logo-cursor"
               >
                 {item}
-              </a>
+              </button>
             ))}
 
             {/* Book a Table Button */}
@@ -57,7 +79,7 @@ export const Navigation = () => {
               onClick={handleBookTableClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200"
+              className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200 logo-cursor"
             >
               Book a Table
             </motion.button>
@@ -81,19 +103,19 @@ export const Navigation = () => {
           <div className="md:hidden border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item}
-                  href="#"
-                  className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
+                  onClick={() => handleNavItemClick(item)}
+                  className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium w-full text-left logo-cursor"
                 >
                   {item}
-                </a>
+                </button>
               ))}
               <motion.button
                 onClick={handleBookTableClick}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200 mt-4 ml-3"
+                className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200 mt-4 ml-3 logo-cursor"
               >
                 Book a Table
               </motion.button>
@@ -102,5 +124,6 @@ export const Navigation = () => {
         )}
       </div>
     </nav>
+    </>
   );
 };

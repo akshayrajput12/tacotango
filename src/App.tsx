@@ -3,21 +3,44 @@ import { Navigation, Footer } from './components';
 import { Home } from './pages';
 import { ReservationPage } from './pages/reservation';
 import { GalleryPage } from './pages/gallery';
+import { OurStoryPage } from './pages/our-story';
+import { EventsPage } from './pages/events';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
-  // Simple routing based on URL hash
+  // Clean URL routing without hash
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1) || 'home';
-      setCurrentPage(hash);
+    const handleRouteChange = () => {
+      const path = window.location.pathname;
+
+      // Route mapping
+      const routes: { [key: string]: string } = {
+        '/': 'home',
+        '/reservation': 'reservation',
+        '/gallery': 'gallery',
+        '/our-story': 'our-story',
+        '/events': 'events'
+      };
+
+      const page = routes[path];
+
+      if (page) {
+        setCurrentPage(page);
+      } else {
+        // Default to home for unknown routes and update URL
+        setCurrentPage('home');
+        window.history.replaceState(null, '', '/');
+      }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange(); // Set initial page
+    // Handle browser back/forward buttons and initial load
+    window.addEventListener('popstate', handleRouteChange);
 
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    // Set initial page on component mount
+    handleRouteChange();
+
+    return () => window.removeEventListener('popstate', handleRouteChange);
   }, []);
 
   const renderPage = () => {
@@ -26,6 +49,10 @@ function App() {
         return <ReservationPage />;
       case 'gallery':
         return <GalleryPage />;
+      case 'our-story':
+        return <OurStoryPage />;
+      case 'events':
+        return <EventsPage />;
       default:
         return <Home />;
     }

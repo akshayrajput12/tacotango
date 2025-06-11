@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
+import { goHome, goToOurStory } from '../utils/navigation';
 
 export const Footer = () => {
   const footerLinks = [
-    { name: 'Our Story', href: '#about' },
+    { name: 'Our Story', href: '/our-story' },
     { name: 'Menu', href: '#menu' },
     { name: 'Events', href: '#events' },
     { name: 'Gallery', href: '#gallery' },
@@ -39,10 +40,13 @@ export const Footer = () => {
     }
   ];
 
-  const handleLinkClick = (href: string) => {
-    if (href.startsWith('#')) {
-      // Handle internal navigation
-      window.location.hash = href.slice(1);
+  const handleLinkClick = (href: string, linkName: string) => {
+    if (href === '/our-story') {
+      goToOurStory();
+    } else if (href.startsWith('#')) {
+      // Handle internal navigation - for now just scroll to sections
+      // You can implement proper page routing here later
+      console.log('Navigate to:', href.slice(1));
     } else {
       // Handle external links
       window.open(href, '_blank', 'noopener,noreferrer');
@@ -60,7 +64,7 @@ export const Footer = () => {
           className="flex justify-center items-center mb-8"
         >
           <motion.button
-            onClick={() => window.location.hash = 'home'}
+            onClick={goHome}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center space-x-3 transition-all duration-200"
@@ -86,7 +90,7 @@ export const Footer = () => {
           {footerLinks.map((link, index) => (
             <motion.button
               key={link.name}
-              onClick={() => handleLinkClick(link.href)}
+              onClick={() => handleLinkClick(link.href, link.name)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
