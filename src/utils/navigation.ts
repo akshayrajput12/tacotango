@@ -13,7 +13,8 @@ export const routes = {
   gallery: '/gallery',
   ourStory: '/our-story',
   events: '/events',
-  menu: '/menu'
+  menu: '/menu',
+  faq: '/faq'
 } as const;
 
 // Helper functions for common navigation actions
@@ -23,3 +24,4 @@ export const goToGallery = () => navigateTo(routes.gallery);
 export const goToOurStory = () => navigateTo(routes.ourStory);
 export const goToEvents = () => navigateTo(routes.events);
 export const goToMenu = () => navigateTo(routes.menu);
+export const goToFAQ = () => navigateTo(routes.faq);

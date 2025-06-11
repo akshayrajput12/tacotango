@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-
-interface FAQProps {
-  onViewFAQs?: () => void;
-}
+import { goToFAQ } from '../../../utils/navigation';
 
 interface FAQItemProps {
   question: string;
@@ -19,7 +16,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, index }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      whileHover={{
+      whileHover={{ 
         scale: 1.01,
         boxShadow: "0 8px 25px -5px rgba(0, 0, 0, 0.1)"
       }}
@@ -31,14 +28,14 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, index }) => {
         whileHover={{ backgroundColor: "#f9fafb" }}
         whileTap={{ scale: 0.995 }}
       >
-        <span
+        <span 
           className="text-gray-900 font-medium text-sm sm:text-base pr-3"
           style={{ fontFamily: 'Raleway, sans-serif' }}
         >
           {question}
         </span>
         <motion.div
-          animate={{
+          animate={{ 
             rotate: isExpanded ? 180 : 0,
             color: isExpanded ? "#f97316" : "#6b7280"
           }}
@@ -46,14 +43,14 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, index }) => {
           className="flex-shrink-0"
           whileHover={{ scale: 1.1, color: "#f97316" }}
         >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
+          <svg 
+            width="18" 
+            height="18" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
             strokeLinejoin="round"
           >
             <polyline points="6 9 12 15 18 9"></polyline>
@@ -70,7 +67,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, index }) => {
           className="overflow-hidden"
         >
           <div className="px-4 pb-3 pt-1 border-t border-gray-100 bg-orange-50/30">
-            <p
+            <p 
               className="text-gray-700 leading-relaxed text-sm"
               style={{ fontFamily: 'Lato, sans-serif' }}
             >
@@ -83,7 +80,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, index }) => {
   );
 };
 
-export const FAQ = ({ onViewFAQs }: FAQProps) => {
+export const ReservationFAQ = () => {
   const reservationFAQs = [
     {
       question: 'How can I make a reservation?',
@@ -100,14 +97,14 @@ export const FAQ = ({ onViewFAQs }: FAQProps) => {
   ];
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 faq-section" style={{ backgroundColor: '#F5F1EC' }}>
+    <section className="w-full py-16 sm:py-20 md:py-24 reservation-faq-section" style={{ backgroundColor: '#F5F1EC' }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="max-w-5xl"
       >
-        {/* FAQ Heading */}
+        {/* Section Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -148,7 +145,7 @@ export const FAQ = ({ onViewFAQs }: FAQProps) => {
 
         {/* View All FAQs Button */}
         <motion.button
-          onClick={onViewFAQs}
+          onClick={goToFAQ}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -164,50 +161,50 @@ export const FAQ = ({ onViewFAQs }: FAQProps) => {
         </motion.button>
       </motion.div>
 
-      {/* Custom CSS for consistent 1024px-1144px sizing */}
+      {/* Custom CSS for consistent styling */}
       <style>{`
-        .faq-section {
+        .reservation-faq-section {
           padding-left: 2rem;
           padding-right: 2rem;
         }
 
         @media (min-width: 640px) {
-          .faq-section {
+          .reservation-faq-section {
             padding-left: 3rem;
             padding-right: 3rem;
           }
         }
 
         @media (min-width: 768px) {
-          .faq-section {
+          .reservation-faq-section {
             padding-left: 4rem;
             padding-right: 4rem;
           }
         }
 
         @media (min-width: 1024px) and (max-width: 1144px) {
-          .faq-section {
+          .reservation-faq-section {
             padding-left: 6rem;
             padding-right: 6rem;
           }
         }
 
         @media (min-width: 1145px) and (max-width: 1279px) {
-          .faq-section {
+          .reservation-faq-section {
             padding-left: 6rem;
             padding-right: 6rem;
           }
         }
 
         @media (min-width: 1280px) {
-          .faq-section {
+          .reservation-faq-section {
             padding-left: 8rem;
             padding-right: 8rem;
           }
         }
 
         @media (min-width: 1536px) {
-          .faq-section {
+          .reservation-faq-section {
             padding-left: 10rem;
             padding-right: 10rem;
           }

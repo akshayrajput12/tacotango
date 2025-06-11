@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { goHome, goToOurStory, goToMenu, goToEvents, goToGallery, goToReservation } from '../utils/navigation';
+import { goHome, goToOurStory, goToMenu, goToEvents, goToGallery, goToReservation, goToFAQ } from '../utils/navigation';
 
 export const Footer = () => {
   const footerLinks = [
@@ -8,7 +8,8 @@ export const Footer = () => {
     { name: 'Menu', href: '/menu' },
     { name: 'Events', href: '/events' },
     { name: 'Gallery', href: '/gallery' },
-    { name: 'Reservations', href: '/reservation' }
+    { name: 'Reservations', href: '/reservation' },
+    { name: 'FAQ', href: '/faq' }
   ];
 
   const socialLinks = [
@@ -54,6 +55,8 @@ export const Footer = () => {
       goToGallery();
     } else if (href === '/reservation') {
       goToReservation();
+    } else if (href === '/faq') {
+      goToFAQ();
     } else if (href.startsWith('http')) {
       // Handle external links
       window.open(href, '_blank', 'noopener,noreferrer');

@@ -1,6 +1,6 @@
 import { Hero, MenuHighlights, UpcomingEvents, InstagramFeed, BookTableSection, AboutUs, FAQ } from './components';
 import { Gallery } from '../../components';
-import { goToGallery, goToReservation, goToOurStory } from '../../utils/navigation';
+import { goToGallery, goToReservation, goToOurStory, goToFAQ } from '../../utils/navigation';
 
 export const Home = () => {
   const handleViewAllGallery = () => {
@@ -16,10 +16,7 @@ export const Home = () => {
   };
 
   const handleViewFAQs = () => {
-    // Navigate to FAQ page or show more info
-    console.log('View FAQs clicked');
-    // You can implement navigation to an FAQ page here
-    // navigateTo('/faq');
+    goToFAQ();
   };
 
   return (
@@ -37,7 +34,7 @@ export const Home = () => {
       <BookTableSection onBookTable={handleBookTable} />
       <AboutUs onLearnMore={handleLearnMore} />
       <FAQ onViewFAQs={handleViewFAQs} />
-      
+
     </div>
   );
 };
