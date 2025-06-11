@@ -6,23 +6,38 @@ export const Navigation = () => {
 
   const navItems = ['Our Story', 'Menu', 'Events', 'Gallery'];
 
+  const handleHomeClick = () => {
+    window.location.hash = 'home';
+    setIsOpen(false); // Close mobile menu if open
+  };
+
+  const handleBookTableClick = () => {
+    window.location.hash = 'reservation';
+    setIsOpen(false); // Close mobile menu if open
+  };
+
   return (
     <nav className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="flex items-center space-x-3">
+            <motion.button
+              onClick={handleHomeClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center space-x-3 transition-all duration-200"
+            >
               {/* Logo Image */}
               <img
                 src="/src/assets/logo.png"
                 alt="Cafex Logo"
                 className="w-8 h-8 object-contain"
               />
-              <span className="text-lg font-semibold text-gray-900" style={{ fontFamily: 'Raleway, sans-serif' }}>
+              <span className="text-lg font-semibold text-gray-900 hover:text-orange-600 transition-colors duration-200" style={{ fontFamily: 'Raleway, sans-serif' }}>
                 Cafex
               </span>
-            </div>
+            </motion.button>
           </div>
 
           {/* Desktop Menu */}
@@ -38,9 +53,14 @@ export const Navigation = () => {
             ))}
 
             {/* Book a Table Button */}
-            <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200">
+            <motion.button
+              onClick={handleBookTableClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200"
+            >
               Book a Table
-            </button>
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -69,9 +89,14 @@ export const Navigation = () => {
                   {item}
                 </a>
               ))}
-              <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200 mt-4 ml-3">
+              <motion.button
+                onClick={handleBookTableClick}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-full text-sm transition-colors duration-200 mt-4 ml-3"
+              >
                 Book a Table
-              </button>
+              </motion.button>
             </div>
           </div>
         )}

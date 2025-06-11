@@ -59,16 +59,21 @@ export const Footer = () => {
           transition={{ duration: 0.6 }}
           className="flex justify-center items-center mb-8"
         >
-          <div className="flex items-center space-x-3">
+          <motion.button
+            onClick={() => window.location.hash = 'home'}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center space-x-3 transition-all duration-200"
+          >
             <img
               src="/src/assets/logo.png"
               alt="Cafex Logo"
               className="w-10 h-10 object-contain"
             />
-            <span className="text-xl font-semibold" style={{ color: '#96664F', fontFamily: 'Raleway, sans-serif' }}>
+            <span className="text-xl font-semibold hover:opacity-80 transition-opacity duration-200" style={{ color: '#96664F', fontFamily: 'Raleway, sans-serif' }}>
               Cafex
             </span>
-          </div>
+          </motion.button>
         </motion.div>
 
         {/* Navigation Links */}
