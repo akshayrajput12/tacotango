@@ -5,6 +5,7 @@ import { ReservationPage } from './pages/reservation';
 import { GalleryPage } from './pages/gallery';
 import { OurStoryPage } from './pages/our-story';
 import { EventsPage } from './pages/events';
+import { MenuPage } from './pages/menu';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -20,7 +21,8 @@ function App() {
         '/reservation': 'reservation',
         '/gallery': 'gallery',
         '/our-story': 'our-story',
-        '/events': 'events'
+        '/events': 'events',
+        '/menu': 'menu'
       };
 
       const page = routes[path];
@@ -53,6 +55,8 @@ function App() {
         return <OurStoryPage />;
       case 'events':
         return <EventsPage />;
+      case 'menu':
+        return <MenuPage />;
       default:
         return <Home />;
     }

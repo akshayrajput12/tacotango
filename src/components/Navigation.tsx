@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { goHome, goToReservation, goToOurStory, goToGallery, goToEvents } from '../utils/navigation';
+import { goHome, goToReservation, goToOurStory, goToGallery, goToEvents, goToMenu } from '../utils/navigation';
 import logoImage from '../assets/logo.png';
 
 export const Navigation = () => {
@@ -25,6 +25,8 @@ export const Navigation = () => {
       goToGallery();
     } else if (item === 'Events') {
       goToEvents();
+    } else if (item === 'Menu') {
+      goToMenu();
     }
     // Add other navigation handlers here as needed
     setIsOpen(false); // Close mobile menu if open

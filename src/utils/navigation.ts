@@ -10,7 +10,8 @@ export const routes = {
   reservation: '/reservation',
   gallery: '/gallery',
   ourStory: '/our-story',
-  events: '/events'
+  events: '/events',
+  menu: '/menu'
 } as const;
 
 // Helper functions for common navigation actions
@@ -19,3 +20,4 @@ export const goToReservation = () => navigateTo(routes.reservation);
 export const goToGallery = () => navigateTo(routes.gallery);
 export const goToOurStory = () => navigateTo(routes.ourStory);
 export const goToEvents = () => navigateTo(routes.events);
+export const goToMenu = () => navigateTo(routes.menu);

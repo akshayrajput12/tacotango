@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { goHome, goToOurStory } from '../utils/navigation';
+import { goHome, goToOurStory, goToMenu } from '../utils/navigation';
 
 export const Footer = () => {
   const footerLinks = [
     { name: 'Our Story', href: '/our-story' },
-    { name: 'Menu', href: '#menu' },
+    { name: 'Menu', href: '/menu' },
     { name: 'Events', href: '#events' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Contact Us', href: '#contact' }
@@ -43,6 +43,8 @@ export const Footer = () => {
   const handleLinkClick = (href: string, linkName: string) => {
     if (href === '/our-story') {
       goToOurStory();
+    } else if (href === '/menu') {
+      goToMenu();
     } else if (href.startsWith('#')) {
       // Handle internal navigation - for now just scroll to sections
       // You can implement proper page routing here later
@@ -113,7 +115,7 @@ export const Footer = () => {
           {socialLinks.map((social, index) => (
             <motion.button
               key={social.name}
-              onClick={() => handleLinkClick(social.href)}
+              onClick={() => handleLinkClick(social.href, social.name)}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}

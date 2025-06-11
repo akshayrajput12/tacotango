@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
+import { goToMenu } from '../../../utils/navigation';
 
 interface MenuItemType {
   title: string;
@@ -343,6 +344,7 @@ export const MenuHighlights: React.FC = () => {
 
         <div className="flex justify-center">
           <motion.button
+            onClick={goToMenu}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
