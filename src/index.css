@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* Custom Font Definitions */
+@layer base {
+  /* Heading Font - Raleway */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+  }
+
+  /* Body Font - Lato */
+  body, p, span, div, button, input, textarea, label {
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* Ensure consistent font loading */
+  * {
+    font-display: swap;
+  }
+}
