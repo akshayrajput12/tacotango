@@ -6,7 +6,7 @@ interface FAQProps {
 
 export const FAQ = ({ onViewFAQs }: FAQProps) => {
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32 2xl:px-40" style={{ backgroundColor: '#F5F1EC' }}>
+    <section className="w-full py-16 sm:py-20 md:py-24 faq-section" style={{ backgroundColor: '#F5F1EC' }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -52,6 +52,56 @@ export const FAQ = ({ onViewFAQs }: FAQProps) => {
           View FAQs
         </motion.button>
       </motion.div>
+
+      {/* Custom CSS for consistent 1024px-1144px sizing */}
+      <style jsx>{`
+        .faq-section {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+
+        @media (min-width: 640px) {
+          .faq-section {
+            padding-left: 3rem;
+            padding-right: 3rem;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .faq-section {
+            padding-left: 4rem;
+            padding-right: 4rem;
+          }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1144px) {
+          .faq-section {
+            padding-left: 6rem;
+            padding-right: 6rem;
+          }
+        }
+
+        @media (min-width: 1145px) and (max-width: 1279px) {
+          .faq-section {
+            padding-left: 6rem;
+            padding-right: 6rem;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .faq-section {
+            padding-left: 8rem;
+            padding-right: 8rem;
+          }
+        }
+
+        @media (min-width: 1536px) {
+          .faq-section {
+            padding-left: 10rem;
+            padding-right: 10rem;
+          }
+        }
+      `}</style>
     </section>
   );
 };
