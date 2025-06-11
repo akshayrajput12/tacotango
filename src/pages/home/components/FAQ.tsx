@@ -54,7 +54,7 @@ export const FAQ = ({ onViewFAQs }: FAQProps) => {
       </motion.div>
 
       {/* Custom CSS for consistent 1024px-1144px sizing */}
-      <style jsx>{`
+      <style>{`
         .faq-section {
           padding-left: 2rem;
           padding-right: 2rem;

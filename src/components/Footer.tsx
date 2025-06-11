@@ -40,7 +40,7 @@ export const Footer = () => {
     }
   ];
 
-  const handleLinkClick = (href: string, linkName: string) => {
+  const handleLinkClick = (href: string) => {
     if (href === '/our-story') {
       goToOurStory();
     } else if (href === '/menu') {
@@ -92,7 +92,7 @@ export const Footer = () => {
           {footerLinks.map((link, index) => (
             <motion.button
               key={link.name}
-              onClick={() => handleLinkClick(link.href, link.name)}
+              onClick={() => handleLinkClick(link.href)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -115,7 +115,7 @@ export const Footer = () => {
           {socialLinks.map((social, index) => (
             <motion.button
               key={social.name}
-              onClick={() => handleLinkClick(social.href, social.name)}
+              onClick={() => handleLinkClick(social.href)}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
