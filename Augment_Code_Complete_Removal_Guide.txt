@@ -1,0 +1,593 @@
+================================================================================
+                    AUGMENT CODE COMPLETE REMOVAL GUIDE
+                    Step-by-Step Manual Deletion Instructions
+================================================================================
+
+⚠️  WARNING: This guide will permanently delete ALL Augment Code data from your PC.
+    Make sure you want to completely remove everything before proceeding.
+
+📋 CHECKLIST - Check each item as you complete it:
+□ Step 1: Close all applications
+□ Step 2: Uninstall VS Code extension
+□ Step 3: Remove extension files manually
+□ Step 4: Clean VS Code settings
+□ Step 5: Remove application data
+□ Step 6: Clean Windows registry
+□ Step 7: Clear browser data
+□ Step 8: Remove temporary files
+□ Step 9: Clean system cache
+□ Step 10: Final verification
+
+================================================================================
+STEP 1: CLOSE ALL APPLICATIONS
+================================================================================
+
+1.1 Close VS Code completely
+    - Save any work in progress
+    - Close all VS Code windows
+    - Check system tray for VS Code icon and close it
+
+1.2 Close any browsers that might have Augment Code tabs open
+
+1.3 Open Task Manager (Ctrl + Shift + Esc)
+    - Go to "Processes" tab
+    - Look for any processes containing "augment", "code", or "vscode"
+    - Right-click and "End Task" for any Augment-related processes
+
+1.4 Open Command Prompt as Administrator
+    - Press Win + R
+    - Type "cmd"
+    - Press Ctrl + Shift + Enter (to run as admin)
+    - Type: taskkill /F /IM "Code.exe"
+    - Type: taskkill /F /IM "augment*"
+
+================================================================================
+STEP 2: UNINSTALL VS CODE EXTENSION
+================================================================================
+
+2.1 Open VS Code
+    - Launch Visual Studio Code
+
+2.2 Open Extensions panel
+    - Press Ctrl + Shift + X
+    - OR click the Extensions icon in the sidebar
+
+2.3 Search for Augment extensions
+    - In the search box, type "augment"
+    - Look for any extensions with "Augment" in the name
+
+2.4 Uninstall each Augment extension
+    - Click on each Augment extension
+    - Click the "Uninstall" button
+    - Confirm the uninstallation
+
+2.5 Search for related extensions
+    - Search for "code completion"
+    - Search for "AI assistant"
+    - Uninstall any other Augment-related extensions
+
+2.6 Restart VS Code
+    - Close VS Code completely
+    - Reopen VS Code to ensure changes take effect
+
+================================================================================
+STEP 3: REMOVE EXTENSION FILES MANUALLY
+================================================================================
+
+3.1 Navigate to VS Code extensions folder
+    - Press Win + R
+    - Type: %USERPROFILE%\.vscode\extensions
+    - Press Enter
+
+3.2 Delete Augment extension folders
+    - Look for folders containing "augment" in the name
+    - Examples: "augmentcode.augment-*", "augment-*", etc.
+    - Right-click each folder → Delete
+    - Empty the Recycle Bin
+
+3.3 Check alternative extension locations
+    - Navigate to: %APPDATA%\Code\extensions
+    - Navigate to: %LOCALAPPDATA%\Programs\Microsoft VS Code\resources\app\extensions
+    - Delete any Augment-related folders
+
+3.4 Check for portable VS Code installations
+    - If you use portable VS Code, check its data folder
+    - Look in: [VS Code Portable]\data\extensions
+    - Delete any Augment-related folders
+
+================================================================================
+STEP 4: CLEAN VS CODE SETTINGS
+================================================================================
+
+4.1 Open VS Code User Settings
+    - Press Win + R
+    - Type: %APPDATA%\Code\User
+    - Press Enter
+
+4.2 Edit settings.json
+    - Open "settings.json" with Notepad
+    - Look for any lines containing "augment"
+    - Delete entire lines that reference Augment
+    - Examples to remove:
+      "augment.enable": true,
+      "augment.apiKey": "...",
+      "augment.autoComplete": true,
+    - Save the file
+
+4.3 Edit keybindings.json
+    - Open "keybindings.json" with Notepad
+    - Remove any Augment-related key bindings
+    - Save the file
+
+4.4 Check workspace settings
+    - Navigate to your project folders
+    - Look for .vscode folders in each project
+    - Open settings.json in each .vscode folder
+    - Remove any Augment-related settings
+    - Save all files
+
+4.5 Clear VS Code cache
+    - Navigate to: %APPDATA%\Code\CachedExtensions
+    - Delete any files containing "augment"
+    - Navigate to: %APPDATA%\Code\logs
+    - Delete log folders (they'll be recreated)
+
+================================================================================
+STEP 5: REMOVE APPLICATION DATA
+================================================================================
+
+5.1 Remove from AppData\Roaming
+    - Press Win + R
+    - Type: %APPDATA%
+    - Press Enter
+    - Look for "Augment" or "AugmentCode" folders
+    - Right-click → Delete
+
+5.2 Remove from AppData\Local
+    - Press Win + R
+    - Type: %LOCALAPPDATA%
+    - Press Enter
+    - Look for "Augment" or "AugmentCode" folders
+    - Right-click → Delete
+
+5.3 Remove from User Profile
+    - Press Win + R
+    - Type: %USERPROFILE%
+    - Press Enter
+    - Look for hidden folders starting with ".augment"
+    - To see hidden files: View → Hidden items (check the box)
+    - Delete any .augment* folders
+
+5.4 Remove from ProgramData
+    - Press Win + R
+    - Type: %PROGRAMDATA%
+    - Press Enter
+    - Look for "Augment" folders
+    - Right-click → Delete
+
+5.5 Check Program Files
+    - Navigate to: C:\Program Files\
+    - Navigate to: C:\Program Files (x86)\
+    - Look for "Augment" folders
+    - Right-click → Delete (may need admin rights)
+
+================================================================================
+STEP 6: CLEAN WINDOWS REGISTRY
+================================================================================
+
+⚠️  CAUTION: Editing registry can damage Windows. Create a backup first!
+
+6.1 Create Registry Backup
+    - Press Win + R
+    - Type: regedit
+    - Press Enter
+    - File → Export
+    - Save as "registry_backup_before_augment_cleanup.reg"
+
+6.2 Search and Delete Augment Keys
+    - In Registry Editor, press Ctrl + F
+    - Search for: "augment"
+    - Delete any keys/values found (Right-click → Delete)
+    - Press F3 to find next occurrence
+    - Repeat until no more results
+
+6.3 Check specific registry locations
+    - Navigate to: HKEY_CURRENT_USER\Software
+    - Look for "Augment" or "AugmentCode" keys
+    - Right-click → Delete
+
+    - Navigate to: HKEY_LOCAL_MACHINE\SOFTWARE
+    - Look for "Augment" or "AugmentCode" keys
+    - Right-click → Delete
+
+6.4 Clean uninstall entries
+    - Navigate to: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall
+    - Look for Augment entries
+    - Right-click → Delete
+
+    - Navigate to: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+    - Look for Augment entries
+    - Right-click → Delete
+
+6.5 Close Registry Editor
+
+================================================================================
+STEP 7: CLEAR BROWSER DATA
+================================================================================
+
+7.1 Google Chrome
+    - Open Chrome
+    - Press Ctrl + Shift + Delete
+    - Select "All time" for time range
+    - Check: Cookies, Cached images, Site data
+    - Click "Clear data"
+    - Go to chrome://settings/content/all
+    - Search for "augment"
+    - Delete any Augment-related site data
+
+7.2 Microsoft Edge
+    - Open Edge
+    - Press Ctrl + Shift + Delete
+    - Select "All time"
+    - Check all boxes
+    - Click "Clear now"
+
+7.3 Firefox
+    - Open Firefox
+    - Press Ctrl + Shift + Delete
+    - Select "Everything"
+    - Check all boxes
+    - Click "Clear Now"
+
+7.4 Clear DNS Cache
+    - Open Command Prompt as Administrator
+    - Type: ipconfig /flushdns
+    - Press Enter
+
+================================================================================
+STEP 8: REMOVE TEMPORARY FILES
+================================================================================
+
+8.1 Clear Windows Temp folder
+    - Press Win + R
+    - Type: %TEMP%
+    - Press Enter
+    - Select all files (Ctrl + A)
+    - Delete (some files may be in use, skip them)
+
+8.2 Clear System Temp folder
+    - Navigate to: C:\Windows\Temp
+    - Delete all files (may need admin rights)
+
+8.3 Run Disk Cleanup
+    - Press Win + R
+    - Type: cleanmgr
+    - Press Enter
+    - Select your main drive (usually C:)
+    - Check all boxes
+    - Click "OK" → "Delete Files"
+
+8.4 Clear Prefetch
+    - Navigate to: C:\Windows\Prefetch
+    - Delete files containing "augment" or "code"
+
+================================================================================
+STEP 9: CLEAN SYSTEM CACHE
+================================================================================
+
+9.1 Clear Windows Store Cache
+    - Press Win + R
+    - Type: wsreset.exe
+    - Press Enter
+    - Wait for the process to complete
+
+9.2 Clear Font Cache
+    - Press Win + R
+    - Type: %WINDIR%\ServiceProfiles\LocalService\AppData\Local\FontCache
+    - Press Enter
+    - Delete all files in this folder
+
+9.3 Clear Icon Cache
+    - Open Command Prompt as Administrator
+    - Type: ie4uinit.exe -show
+    - Press Enter
+
+9.4 Restart Windows Explorer
+    - Press Ctrl + Shift + Esc (Task Manager)
+    - Find "Windows Explorer"
+    - Right-click → Restart
+
+================================================================================
+STEP 10: FINAL VERIFICATION
+================================================================================
+
+10.1 Search for remaining files
+    - Press Win + S
+    - Search for: "augment"
+    - Delete any remaining files/folders found
+
+10.2 Check running processes
+    - Open Task Manager
+    - Look for any Augment-related processes
+    - End any found processes
+
+10.3 Verify VS Code is clean
+    - Open VS Code
+    - Check Extensions (Ctrl + Shift + X)
+    - Verify no Augment extensions are listed
+    - Check Settings for any Augment references
+
+10.4 Test system functionality
+    - Restart your computer
+    - Open VS Code and test basic functionality
+    - Verify no Augment features are present
+
+10.5 Final cleanup
+    - Empty Recycle Bin
+    - Run Windows Update to ensure system stability
+
+================================================================================
+COMPLETION CHECKLIST
+================================================================================
+
+□ All VS Code extensions removed
+□ Extension files manually deleted
+□ VS Code settings cleaned
+□ Application data removed
+□ Registry entries deleted
+□ Browser data cleared
+□ Temporary files removed
+□ System cache cleared
+□ Final verification completed
+□ System restarted
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If you encounter issues:
+
+1. "Access Denied" errors:
+   - Run Command Prompt as Administrator
+   - Use: takeown /f "filepath" /r /d y
+   - Then: icacls "filepath" /grant administrators:F /t
+
+2. Files won't delete:
+   - Restart in Safe Mode
+   - Try deletion again
+   - Use third-party tools like Unlocker
+
+3. Registry access denied:
+   - Run Registry Editor as Administrator
+   - Right-click key → Permissions → Full Control
+
+4. VS Code still shows Augment features:
+   - Completely uninstall VS Code
+   - Delete all VS Code folders
+   - Reinstall VS Code fresh
+
+================================================================================
+SUPPORT
+================================================================================
+
+If you need additional help:
+- Check Windows Event Viewer for errors
+- Use System File Checker: sfc /scannow
+- Consider using CCleaner for additional cleanup
+- Contact system administrator if on corporate network
+
+================================================================================
+ADVANCED CLEANUP (FOR STUBBORN REMNANTS)
+================================================================================
+
+If standard removal didn't work, try these advanced methods:
+
+A1. Force Delete with Command Line
+    - Open Command Prompt as Administrator
+    - Use: rd /s /q "C:\path\to\augment\folder"
+    - For files: del /f /q "C:\path\to\augment\file"
+
+A2. Boot from Safe Mode
+    - Hold Shift while clicking Restart
+    - Choose Troubleshoot → Advanced Options → Startup Settings
+    - Press F4 for Safe Mode
+    - Repeat deletion steps in Safe Mode
+
+A3. Use PowerShell for Deep Cleanup
+    - Open PowerShell as Administrator
+    - Run: Get-ChildItem -Path C:\ -Recurse -Name "*augment*" -ErrorAction SilentlyContinue
+    - Delete found items: Remove-Item -Path "filepath" -Recurse -Force
+
+A4. Check Windows Services
+    - Press Win + R, type: services.msc
+    - Look for any Augment-related services
+    - Right-click → Stop → Properties → Startup type: Disabled
+
+A5. Clean Windows Event Logs
+    - Press Win + R, type: eventvwr.msc
+    - Navigate through logs and clear any Augment-related entries
+
+A6. Reset VS Code Completely
+    - Uninstall VS Code from Control Panel
+    - Delete: %APPDATA%\Code (entire folder)
+    - Delete: %USERPROFILE%\.vscode (entire folder)
+    - Reinstall VS Code fresh
+
+A7. Use Third-Party Tools
+    - Download Revo Uninstaller (free version)
+    - Run advanced scan for leftover files
+    - Use CCleaner for registry cleanup
+    - Try IObit Uninstaller for stubborn programs
+
+================================================================================
+NETWORK AND FIREWALL CLEANUP
+================================================================================
+
+N1. Windows Firewall Rules
+    - Press Win + R, type: wf.msc
+    - Look for Augment-related rules in Inbound/Outbound Rules
+    - Right-click → Delete
+
+N2. Hosts File Check
+    - Navigate to: C:\Windows\System32\drivers\etc\hosts
+    - Open with Notepad as Administrator
+    - Remove any lines containing "augment"
+    - Save the file
+
+N3. Proxy Settings
+    - Press Win + I → Network & Internet → Proxy
+    - Ensure no Augment-related proxy is set
+    - Reset to "Automatically detect settings"
+
+N4. DNS Settings
+    - Open Command Prompt as Administrator
+    - Type: netsh winsock reset
+    - Type: netsh int ip reset
+    - Restart computer
+
+================================================================================
+SECURITY AND PRIVACY CLEANUP
+================================================================================
+
+S1. Clear Saved Passwords
+    - Press Win + R, type: control keymgr.dll
+    - Remove any Augment-related credentials
+
+S2. Certificate Store
+    - Press Win + R, type: certmgr.msc
+    - Look for Augment certificates in all folders
+    - Right-click → Delete
+
+S3. Windows Credential Manager
+    - Control Panel → User Accounts → Credential Manager
+    - Remove any Augment-related credentials
+
+S4. Clear AutoComplete Data
+    - In browsers, clear all form data and passwords
+    - Check password managers for Augment entries
+
+================================================================================
+VERIFICATION COMMANDS
+================================================================================
+
+Run these commands to verify complete removal:
+
+V1. File System Search
+    - dir C:\*augment* /s /b > augment_search.txt
+    - Check the output file for any remaining files
+
+V2. Registry Search
+    - reg query HKLM /f "augment" /s > reg_search.txt
+    - reg query HKCU /f "augment" /s >> reg_search.txt
+    - Check output files for remaining entries
+
+V3. Process Check
+    - tasklist | findstr /i augment
+    - Should return no results
+
+V4. Service Check
+    - sc query | findstr /i augment
+    - Should return no results
+
+V5. Network Connection Check
+    - netstat -an | findstr augment
+    - Should return no results
+
+================================================================================
+POST-REMOVAL SYSTEM OPTIMIZATION
+================================================================================
+
+O1. System File Check
+    - Open Command Prompt as Administrator
+    - Run: sfc /scannow
+    - Wait for completion and fix any issues
+
+O2. Registry Cleanup
+    - Run: cleanmgr /sageset:1
+    - Select all options and run cleanup
+
+O3. Defragment Registry
+    - Download and run Auslogics Registry Defrag (free)
+    - Or use built-in: defrag C: /O
+
+O4. Update System
+    - Press Win + I → Update & Security
+    - Check for and install all updates
+
+O5. Reset Windows Search
+    - Open PowerShell as Administrator
+    - Run: Get-AppxPackage -AllUsers Microsoft.Windows.Search | Reset-AppxPackage
+
+================================================================================
+EMERGENCY RECOVERY
+================================================================================
+
+If something goes wrong during cleanup:
+
+E1. System Restore
+    - Press Win + R, type: rstrui.exe
+    - Choose a restore point before Augment installation
+    - Follow the wizard to restore
+
+E2. Registry Restore
+    - Double-click the registry backup file you created
+    - Confirm to restore registry
+
+E3. VS Code Reinstall
+    - Download fresh VS Code installer
+    - Run as Administrator
+    - Choose "Clean Install" if available
+
+E4. Windows Reset (Last Resort)
+    - Press Win + I → Update & Security → Recovery
+    - Click "Get started" under Reset this PC
+    - Choose "Keep my files"
+
+================================================================================
+PREVENTION FOR FUTURE
+================================================================================
+
+P1. Before Installing Extensions
+    - Research extensions thoroughly
+    - Check reviews and ratings
+    - Verify publisher authenticity
+
+P2. Regular Backups
+    - Create system restore points regularly
+    - Backup registry before major changes
+    - Export VS Code settings before installing extensions
+
+P3. Monitoring Tools
+    - Use Process Monitor to track file changes
+    - Monitor registry changes with RegShot
+    - Keep system clean with regular maintenance
+
+================================================================================
+FINAL VERIFICATION CHECKLIST
+================================================================================
+
+Complete this final checklist to ensure 100% removal:
+
+□ No Augment processes running (Task Manager check)
+□ No Augment services installed (services.msc check)
+□ No Augment files found (file system search)
+□ No Augment registry entries (registry search)
+□ No Augment network connections (netstat check)
+□ VS Code works without Augment features
+□ Browser has no Augment data
+□ No Augment certificates installed
+□ No Augment firewall rules
+□ System runs stable after restart
+
+================================================================================
+END OF COMPREHENSIVE GUIDE
+================================================================================
+
+✅ Augment Code should now be COMPLETELY and PERMANENTLY removed from your system.
+🔄 Restart your computer to ensure all changes take effect.
+📝 Keep this guide for future reference.
+🛡️ Your system is now clean and secure.
+
+Total removal time: Approximately 30-60 minutes depending on system complexity.
+
+If you followed all steps, there should be absolutely nothing left of Augment Code on your PC.

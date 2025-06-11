@@ -14,6 +14,8 @@ export const routes = {
   ourStory: '/our-story',
   events: '/events',
   menu: '/menu',
+  customerStories: '/customer-stories',
+  contact: '/contact',
   faq: '/faq'
 } as const;
 
@@ -24,4 +26,6 @@ export const goToGallery = () => navigateTo(routes.gallery);
 export const goToOurStory = () => navigateTo(routes.ourStory);
 export const goToEvents = () => navigateTo(routes.events);
 export const goToMenu = () => navigateTo(routes.menu);
+export const goToCustomerStories = () => navigateTo(routes.customerStories);
+export const goToContact = () => navigateTo(routes.contact);
 export const goToFAQ = () => navigateTo(routes.faq);

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { goHome, goToOurStory, goToMenu, goToEvents, goToGallery, goToReservation, goToFAQ } from '../utils/navigation';
+import { goHome, goToOurStory, goToMenu, goToEvents, goToGallery, goToReservation, goToFAQ, goToContact, goToCustomerStories } from '../utils/navigation';
 
 export const Footer = () => {
   const footerLinks = [
@@ -9,6 +9,8 @@ export const Footer = () => {
     { name: 'Events', href: '/events' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Reservations', href: '/reservation' },
+    { name: 'Customer Stories', href: '/customer-stories' },
+    { name: 'Contact Us', href: '/contact' },
     { name: 'FAQ', href: '/faq' }
   ];
 
@@ -55,6 +57,10 @@ export const Footer = () => {
       goToGallery();
     } else if (href === '/reservation') {
       goToReservation();
+    } else if (href === '/customer-stories') {
+      goToCustomerStories();
+    } else if (href === '/contact') {
+      goToContact();
     } else if (href === '/faq') {
       goToFAQ();
     } else if (href.startsWith('http')) {

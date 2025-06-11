@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { goHome, goToReservation, goToOurStory, goToGallery, goToEvents, goToMenu, goToFAQ } from '../utils/navigation';
+import { goHome, goToReservation, goToOurStory, goToGallery, goToEvents, goToMenu, goToFAQ, goToContact, goToCustomerStories } from '../utils/navigation';
 import logoImage from '../assets/logo.png';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = ['Our Story', 'Menu', 'Events', 'Gallery', 'FAQ'];
+  const navItems = ['Our Story', 'Menu', 'Events', 'Gallery', 'Customer Stories', 'Contact Us', 'FAQ'];
 
   const handleHomeClick = () => {
     goHome();
@@ -27,6 +27,10 @@ export const Navigation = () => {
       goToEvents();
     } else if (item === 'Menu') {
       goToMenu();
+    } else if (item === 'Customer Stories') {
+      goToCustomerStories();
+    } else if (item === 'Contact Us') {
+      goToContact();
     } else if (item === 'FAQ') {
       goToFAQ();
     }

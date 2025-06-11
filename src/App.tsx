@@ -6,6 +6,8 @@ import { GalleryPage } from './pages/gallery';
 import { OurStoryPage } from './pages/our-story';
 import { EventsPage } from './pages/events';
 import { MenuPage } from './pages/menu';
+import { CustomerStoriesPage } from './pages/customer-stories';
+import { ContactPage } from './pages/contact';
 import { FAQPage } from './pages/faq';
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         '/our-story': 'our-story',
         '/events': 'events',
         '/menu': 'menu',
+        '/customer-stories': 'customer-stories',
+        '/contact': 'contact',
         '/faq': 'faq'
       };
 
@@ -59,6 +63,10 @@ function App() {
         return <EventsPage />;
       case 'menu':
         return <MenuPage />;
+      case 'customer-stories':
+        return <CustomerStoriesPage />;
+      case 'contact':
+        return <ContactPage />;
       case 'faq':
         return <FAQPage />;
       default:
