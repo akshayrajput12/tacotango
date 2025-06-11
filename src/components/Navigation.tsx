@@ -37,7 +37,7 @@ export const Navigation = () => {
       {/* Custom CSS for logo cursor */}
       <style>{`
         .logo-cursor:hover {
-          cursor: url('${logoImage}') 16 16, pointer !important;
+          cursor: url('/src/assets/logo.png') 16 16, pointer !important;
         }
       `}</style>
 

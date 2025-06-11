@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
-import { goHome, goToOurStory, goToMenu } from '../utils/navigation';
+import { goHome, goToOurStory, goToMenu, goToEvents, goToGallery, goToReservation } from '../utils/navigation';
 
 export const Footer = () => {
   const footerLinks = [
+    { name: 'Home', href: '/' },
     { name: 'Our Story', href: '/our-story' },
     { name: 'Menu', href: '/menu' },
-    { name: 'Events', href: '#events' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Contact Us', href: '#contact' }
+    { name: 'Events', href: '/events' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Reservations', href: '/reservation' }
   ];
 
   const socialLinks = [
@@ -41,15 +42,19 @@ export const Footer = () => {
   ];
 
   const handleLinkClick = (href: string) => {
-    if (href === '/our-story') {
+    if (href === '/') {
+      goHome();
+    } else if (href === '/our-story') {
       goToOurStory();
     } else if (href === '/menu') {
       goToMenu();
-    } else if (href.startsWith('#')) {
-      // Handle internal navigation - for now just scroll to sections
-      // You can implement proper page routing here later
-      console.log('Navigate to:', href.slice(1));
-    } else {
+    } else if (href === '/events') {
+      goToEvents();
+    } else if (href === '/gallery') {
+      goToGallery();
+    } else if (href === '/reservation') {
+      goToReservation();
+    } else if (href.startsWith('http')) {
       // Handle external links
       window.open(href, '_blank', 'noopener,noreferrer');
     }
@@ -72,7 +77,7 @@ export const Footer = () => {
             className="flex items-center space-x-3 transition-all duration-200"
           >
             <img
-              src="/src/assets/logo.png"
+              src="/logo.png"
               alt="Cafex Logo"
               className="w-10 h-10 object-contain"
             />
