@@ -17,7 +17,7 @@ export const ReviewsManagement: React.FC = () => {
     rejectReview,
     toggleFeatured,
     getReviewsByStatus,
-    refetch
+    // refetch
   } = useAdminReviews()
 
   const { stats, loading: statsLoading } = useReviewStats()
@@ -103,14 +103,14 @@ export const ReviewsManagement: React.FC = () => {
     }
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'approved': return 'bg-green-100 text-green-700'
-      case 'pending': return 'bg-yellow-100 text-yellow-700'
-      case 'rejected': return 'bg-red-100 text-red-700'
-      default: return 'bg-gray-100 text-gray-700'
-    }
-  }
+  // const getStatusColor = (status: string) => {
+  //   switch (status) {
+  //     case 'approved': return 'bg-green-100 text-green-700'
+  //     case 'pending': return 'bg-yellow-100 text-yellow-700'
+  //     case 'rejected': return 'bg-red-100 text-red-700'
+  //     default: return 'bg-gray-100 text-gray-700'
+  //   }
+  // }
 
   const getStatusIcon = (status: string) => {
     switch (status) {

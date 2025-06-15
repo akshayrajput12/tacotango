@@ -123,13 +123,13 @@ export class DashboardService {
 
       // Calculate event statistics
       const now = new Date()
-      const upcomingEvents = events.filter(e => 
-        e.status === 'published' && new Date(e.date) >= now
+      const upcomingEvents = events.filter(e =>
+        e.status === 'upcoming' && new Date(e.date) >= now
       ).length
-      const pastEvents = events.filter(e => 
+      const pastEvents = events.filter(e =>
         new Date(e.date) < now
       ).length
-      const publishedEvents = events.filter(e => e.status === 'published').length
+      const activeEvents = events.filter(e => e.active).length
 
       // Calculate menu statistics
       const availableMenuItems = menuItems.filter(m => m.available).length
@@ -138,7 +138,7 @@ export class DashboardService {
 
       // Calculate Instagram statistics
       const publishedPosts = instagramPosts.filter(p => p.status === 'published').length
-      const pendingPosts = instagramPosts.filter(p => p.status === 'pending').length
+      const draftPosts = instagramPosts.filter(p => p.status === 'draft').length
       const featuredPosts = instagramPosts.filter(p => p.featured).length
 
       // Calculate gallery statistics
@@ -165,7 +165,7 @@ export class DashboardService {
           total: events.length,
           upcoming: upcomingEvents,
           past: pastEvents,
-          published: publishedEvents
+          published: activeEvents
         },
         menu: {
           total: menuItems.length,
@@ -176,7 +176,7 @@ export class DashboardService {
         instagram: {
           total: instagramPosts.length,
           published: publishedPosts,
-          pending: pendingPosts,
+          pending: draftPosts,
           featured: featuredPosts
         },
         gallery: {
@@ -254,7 +254,7 @@ export class DashboardService {
       // Get upcoming events (next 5)
       const now = new Date()
       const upcomingEvents = events
-        .filter(e => e.status === 'published' && new Date(e.date) >= now)
+        .filter(e => e.status === 'upcoming' && new Date(e.date) >= now)
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
         .slice(0, 5)
         .map(e => ({
@@ -295,8 +295,8 @@ export class DashboardService {
       const pendingReviews = reviews.pendingReviews
 
       const now = new Date()
-      const upcomingEvents = events.filter(e => 
-        e.status === 'published' && new Date(e.date) >= now
+      const upcomingEvents = events.filter(e =>
+        e.status === 'upcoming' && new Date(e.date) >= now
       ).length
 
       // Calculate low stock items (items marked as unavailable)
@@ -339,8 +339,8 @@ export class DashboardService {
       ])
 
       const now = new Date()
-      const activeEvents = events.filter(e => 
-        e.status === 'published' && new Date(e.date) >= now
+      const activeEvents = events.filter(e =>
+        e.status === 'upcoming' && new Date(e.date) >= now
       ).length
 
       const pendingReservations = reservations.filter(r => r.status === 'pending').length

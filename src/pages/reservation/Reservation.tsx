@@ -366,7 +366,7 @@ export const ReservationPage = () => {
   const calendarRef = useRef<HTMLDivElement>(null);
 
   // Use the database hook
-  const { createReservation, loading: createLoading, error: createError } = useCreateReservation();
+  const { createReservation } = useCreateReservation();
 
   const timeSlots = [
     '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM',

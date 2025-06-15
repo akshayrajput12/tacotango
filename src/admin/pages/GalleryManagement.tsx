@@ -291,7 +291,7 @@ export const GalleryManagement: React.FC = () => {
             {/* Modal Content with internal scroll */}
             <div className="flex-1 overflow-hidden">
               <GalleryImageCard
-                image={selectedImage}
+                image={selectedImage || undefined}
                 isEditing={true}
                 onSave={handleSaveImage}
                 onCancel={handleCancelEdit}

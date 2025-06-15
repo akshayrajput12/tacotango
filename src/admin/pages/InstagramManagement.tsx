@@ -15,7 +15,7 @@ export const InstagramManagement: React.FC = () => {
     updatePost,
     deletePost,
     getPostsByStatus,
-    refetch
+    // refetch
   } = useAdminInstagram()
 
 
@@ -71,14 +71,14 @@ export const InstagramManagement: React.FC = () => {
     }
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'published': return 'bg-green-100 text-green-700'
-      case 'scheduled': return 'bg-blue-100 text-blue-700'
-      case 'draft': return 'bg-gray-100 text-gray-700'
-      default: return 'bg-gray-100 text-gray-700'
-    }
-  }
+  // const getStatusColor = (status: string) => {
+  //   switch (status) {
+  //     case 'published': return 'bg-green-100 text-green-700'
+  //     case 'scheduled': return 'bg-blue-100 text-blue-700'
+  //     case 'draft': return 'bg-gray-100 text-gray-700'
+  //     default: return 'bg-gray-100 text-gray-700'
+  //   }
+  // }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -266,7 +266,7 @@ export const InstagramManagement: React.FC = () => {
             {/* Modal Content with internal scroll */}
             <div className="flex-1 overflow-hidden">
               <InstagramPostCard
-                post={selectedPost}
+                post={selectedPost || undefined}
                 isEditing={true}
                 onSave={handleSavePost}
                 onCancel={handleCancelEdit}

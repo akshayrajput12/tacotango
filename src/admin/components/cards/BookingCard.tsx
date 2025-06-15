@@ -1,6 +1,20 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import type { Booking } from '../../utils/mockData'
+
+type BookingStatus = 'pending' | 'confirmed' | 'cancelled' | 'completed' | 'no_show'
+
+interface Booking {
+  id: string
+  customerName: string
+  customerEmail: string
+  customerPhone: string
+  date: string
+  time: string
+  guests: number
+  status: BookingStatus
+  specialRequests?: string
+  createdAt: string
+}
 
 interface BookingCardProps {
   booking?: Booking
@@ -10,7 +24,7 @@ interface BookingCardProps {
   index?: number
   isSelected?: boolean
   onSelect?: () => void
-  onStatusChange?: (bookingId: string, status: Booking['status']) => void
+  onStatusChange?: (bookingId: string, status: BookingStatus) => void
 }
 
 export const BookingCard: React.FC<BookingCardProps> = ({
@@ -30,7 +44,7 @@ export const BookingCard: React.FC<BookingCardProps> = ({
     date: booking?.date || '',
     time: booking?.time || '',
     guests: booking?.guests || 2,
-    status: booking?.status || 'pending' as Booking['status'],
+    status: booking?.status || 'pending' as BookingStatus,
     specialRequests: booking?.specialRequests || '',
     createdAt: booking?.createdAt || new Date().toISOString()
   })
@@ -122,7 +136,7 @@ export const BookingCard: React.FC<BookingCardProps> = ({
             <div className="flex flex-col gap-2 sm:w-32">
               <select
                 value={booking.status}
-                onChange={(e) => onStatusChange(booking.id, e.target.value as Booking['status'])}
+                onChange={(e) => onStatusChange(booking.id, e.target.value as BookingStatus)}
                 onClick={(e) => e.stopPropagation()}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 style={{ fontFamily: 'Lato, sans-serif' }}
@@ -309,7 +323,7 @@ export const BookingCard: React.FC<BookingCardProps> = ({
           </label>
           <select
             value={formData.status}
-            onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as Booking['status'] }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as BookingStatus }))}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             style={{ fontFamily: 'Lato, sans-serif' }}
           >

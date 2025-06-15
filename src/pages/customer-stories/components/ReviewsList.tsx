@@ -3,7 +3,7 @@ import { useState, forwardRef, useImperativeHandle } from 'react';
 import { usePublicReviews } from '../../../hooks/useReviews';
 import { ReviewAvatar } from '../../../components/Avatar';
 
-export const ReviewsList = forwardRef<{ refetch: () => void }, {}>((props, ref) => {
+export const ReviewsList = forwardRef<{ refetch: () => void }, {}>((_, ref) => {
   const { reviews, loading, error, refetch } = usePublicReviews();
   const [likedReviews, setLikedReviews] = useState<Set<string>>(new Set());
 

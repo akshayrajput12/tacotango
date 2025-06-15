@@ -1,4 +1,4 @@
-import { supabase } from '../admin/auth/supabaseClient'
+import { supabase, supabaseUrl } from '../admin/auth/supabaseClient'
 
 // Type definitions for database
 export interface SpecialOfferRow {
@@ -102,7 +102,7 @@ const transformSpecialOffer = (row: SpecialOfferRow): SpecialOffer => {
   // Determine the image URL - prefer uploaded file over external URL
   let imageUrl = row.image_url || ''
   if (row.image_file_path) {
-    imageUrl = `${supabase.supabaseUrl}/storage/v1/object/public/offer-images/${row.image_file_path}`
+    imageUrl = `${supabaseUrl}/storage/v1/object/public/offer-images/${row.image_file_path}`
   }
 
   const isExpired = new Date(row.valid_until) < new Date()

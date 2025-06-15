@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { goToEvents } from '../../../utils/navigation';
 import { usePublicEvents } from '../../../hooks/useEvents';
-import type { Event } from '../../../services/eventsService';
+// import type { Event } from '../../../services/eventsService';
 
 // Transform Event to match the component's expected format
 const formatDate = (dateString: string) => {
@@ -10,7 +10,7 @@ const formatDate = (dateString: string) => {
 };
 
 export const UpcomingEvents = () => {
-  const { featuredEvents, loading, error } = usePublicEvents();
+  const { featuredEvents, loading } = usePublicEvents();
 
   // Use database events only (limit to 2 for home page)
   const displayEvents = featuredEvents.slice(0, 2);

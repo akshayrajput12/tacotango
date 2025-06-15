@@ -18,7 +18,6 @@ export const GalleryImageCard: React.FC<GalleryImageCardProps> = ({
   isEditing = false,
   onSave,
   onCancel,
-  index = 0,
   isSelected = false,
   onToggleSelect
 }) => {

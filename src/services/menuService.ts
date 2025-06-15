@@ -1,4 +1,4 @@
-import { supabase, type Database } from '../admin/auth/supabaseClient'
+import { supabase, supabaseUrl, type Database } from '../admin/auth/supabaseClient'
 
 // Type definitions
 export type MenuItemRow = Database['public']['Tables']['menu_items']['Row']
@@ -28,7 +28,7 @@ const transformMenuItem = (row: MenuItemRow): MenuItem => {
   // Determine the image URL - prefer uploaded file over external URL
   let imageUrl = row.image_url || ''
   if (row.image_file_path) {
-    imageUrl = `${supabase.supabaseUrl}/storage/v1/object/public/menu-images/${row.image_file_path}`
+    imageUrl = `${supabaseUrl}/storage/v1/object/public/menu-images/${row.image_file_path}`
   }
 
   return {

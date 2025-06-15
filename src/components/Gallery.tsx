@@ -25,7 +25,7 @@ export const Gallery = ({
   onViewAll
 }: GalleryProps) => {
   // Use the database hook
-  const { images, loading, error } = usePublicGallery();
+  const { images, loading } = usePublicGallery();
 
   // Use database images only
   const galleryImages = images.map(transformToLegacyFormat);

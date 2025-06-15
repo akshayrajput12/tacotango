@@ -270,7 +270,7 @@ export const MenuManagement: React.FC = () => {
             {/* Modal Content with internal scroll */}
             <div className="flex-1 overflow-hidden">
               <MenuItemCard
-                item={selectedItem}
+                item={selectedItem || undefined}
                 isEditing={true}
                 onSave={handleSaveItem}
                 onCancel={handleCancelEdit}

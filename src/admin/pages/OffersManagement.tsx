@@ -237,7 +237,7 @@ export const OffersManagement: React.FC = () => {
             {/* Modal Content with internal scroll */}
             <div className="flex-1 overflow-hidden">
               <SpecialOfferCard
-                offer={selectedOffer}
+                offer={selectedOffer || undefined}
                 isEditing={true}
                 onSave={handleSaveOffer}
                 onCancel={handleCancelEdit}

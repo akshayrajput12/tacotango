@@ -395,7 +395,7 @@ export const useReservation = (id: string | null) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchReservation = useCallback(async (reservationId: string) => {
+  const fetchReservation = useCallback(async (_reservationId: string) => {
     try {
       setLoading(true)
       setError(null)

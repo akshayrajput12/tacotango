@@ -19,7 +19,7 @@ export const InstagramFeed = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Use the database hook
-  const { featuredPosts, loading, error } = usePublicInstagram();
+  const { featuredPosts, loading } = usePublicInstagram();
 
   // Use database posts only
   const instagramPosts = featuredPosts.map(transformToLegacyFormat);

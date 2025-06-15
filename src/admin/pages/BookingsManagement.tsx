@@ -27,7 +27,7 @@ export const BookingsManagement: React.FC = () => {
     createReservation,
     updateReservation,
     deleteReservation,
-    getReservationsByStatus
+
   } = useAdminReservations()
 
   // Transform reservations to bookings for compatibility
@@ -38,7 +38,7 @@ export const BookingsManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
-  const [selectedBookings, setSelectedBookings] = useState<string[]>([])
+  // const [selectedBookings, setSelectedBookings] = useState<string[]>([])
 
   const filteredBookings = bookings.filter(booking => {
     const matchesFilter = filter === 'all' || booking.status === filter
@@ -62,7 +62,7 @@ export const BookingsManagement: React.FC = () => {
     setShowModal(true)
   }
 
-  const handleEditBooking = (booking: Booking) => {
+  const handleEditBooking = (booking: any) => {
     setSelectedBooking(booking)
     setIsEditing(true)
     setShowModal(true)

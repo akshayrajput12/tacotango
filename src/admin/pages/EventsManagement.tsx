@@ -67,14 +67,14 @@ export const EventsManagement: React.FC = () => {
     }
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'upcoming': return 'bg-blue-100 text-blue-700'
-      case 'ongoing': return 'bg-green-100 text-green-700'
-      case 'completed': return 'bg-gray-100 text-gray-700'
-      default: return 'bg-gray-100 text-gray-700'
-    }
-  }
+  // const getStatusColor = (status: string) => {
+  //   switch (status) {
+  //     case 'upcoming': return 'bg-blue-100 text-blue-700'
+  //     case 'ongoing': return 'bg-green-100 text-green-700'
+  //     case 'completed': return 'bg-gray-100 text-gray-700'
+  //     default: return 'bg-gray-100 text-gray-700'
+  //   }
+  // }
 
   // Show loading state
   if (loading) {
@@ -222,7 +222,7 @@ export const EventsManagement: React.FC = () => {
             {/* Modal Content with internal scroll */}
             <div className="flex-1 overflow-hidden">
               <EventCard
-                event={selectedEvent}
+                event={selectedEvent || undefined}
                 isEditing={true}
                 onSave={handleSaveEvent}
                 onCancel={handleCancelEdit}
