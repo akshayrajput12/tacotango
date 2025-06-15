@@ -1,0 +1,95 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "TacoTango Cafe Chain",
+  "alternateName": "TacoTango Ahmedabad",
+  "description": "Ahmedabad's premier cafe chain offering authentic Mexican cuisine, premium coffee, and vibrant dining experiences across multiple locations in Gujarat.",
+  "url": "https://tacotango-ahmedabad.vercel.app/",
+  "logo": "https://tacotango-ahmedabad.vercel.app/logo.png",
+  "image": [
+    "https://tacotango-ahmedabad.vercel.app/logo.png"
+  ],
+  "telephone": "+91-79-4000-5000",
+  "email": "info@tacotango-ahmedabad.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Multiple Locations",
+    "addressLocality": "Ahmedabad",
+    "addressRegion": "Gujarat",
+    "postalCode": "380001",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "23.0225",
+    "longitude": "72.5714"
+  },
+  "openingHours": [
+    "Mo-Fr 08:00-23:00",
+    "Sa-Su 08:00-24:00"
+  ],
+  "priceRange": "₹₹",
+  "paymentAccepted": [
+    "Cash",
+    "Credit Card",
+    "Debit Card",
+    "UPI",
+    "Digital Wallet",
+    "Paytm",
+    "Google Pay",
+    "PhonePe"
+  ],
+  "currenciesAccepted": "INR",
+  "servesCuisine": [
+    "Mexican",
+    "Coffee",
+    "Cafe Food",
+    "Tacos",
+    "Burritos",
+    "Quesadillas",
+    "Beverages",
+    "Desserts"
+  ],
+  "hasMenu": "https://tacotango-ahmedabad.vercel.app/menu",
+  "acceptsReservations": true,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "250",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Ahmedabad",
+      "sameAs": "https://en.wikipedia.org/wiki/Ahmedabad"
+    },
+    {
+      "@type": "State",
+      "name": "Gujarat",
+      "sameAs": "https://en.wikipedia.org/wiki/Gujarat"
+    }
+  ],
+  "knowsAbout": [
+    "Mexican Cuisine",
+    "Coffee Culture",
+    "Cafe Chain Management",
+    "Authentic Tacos",
+    "Premium Coffee",
+    "Ahmedabad Food Scene",
+    "Gujarat Dining"
+  ],
+  "keywords": "best cafe Ahmedabad, top cafe chain Gujarat, Mexican restaurant Ahmedabad, coffee shop, authentic tacos, premium coffee, vibrant ambiance, SG Highway cafe, CG Road restaurant, Satellite area dining",
+  "sameAs": [
+    "https://www.facebook.com/TacoTangoAhmedabad",
+    "https://www.instagram.com/tacotango_ahmedabad",
+    "https://twitter.com/TacoTangoAhd"
+  ],
+  "founder": {
+    "@type": "Organization",
+    "name": "TacoTango Group"
+  },
+  "foundingDate": "2020",
+  "slogan": "Ahmedabad's Premier Cafe Chain Experience"
+}

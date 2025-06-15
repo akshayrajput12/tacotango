@@ -53,8 +53,11 @@ export const OurLocation = () => {
                   className="text-gray-700 text-sm sm:text-base"
                   style={{ fontFamily: 'Lato, sans-serif' }}
                 >
-                  123 Main Street, Dehradun,<br />
-                  Uttarakhand, India
+                  Multiple Locations Across Ahmedabad:<br />
+                  • SG Highway, Ahmedabad<br />
+                  • CG Road, Navrangpura<br />
+                  • Satellite, Ahmedabad<br />
+                  Gujarat, India - 380001
                 </p>
               </div>
 
@@ -70,7 +73,9 @@ export const OurLocation = () => {
                   className="text-gray-700 text-sm sm:text-base"
                   style={{ fontFamily: 'Lato, sans-serif' }}
                 >
-                  +91 135-123-4567
+                  +91 79-4000-5000 (Main)<br />
+                  +91 79-4000-5001 (SG Highway)<br />
+                  +91 79-4000-5002 (CG Road)
                 </p>
               </div>
 
@@ -86,7 +91,8 @@ export const OurLocation = () => {
                   className="text-gray-700 text-sm sm:text-base"
                   style={{ fontFamily: 'Lato, sans-serif' }}
                 >
-                  info@cafex.com
+                  info@tacotango-ahmedabad.com<br />
+                  reservations@tacotango-ahmedabad.com
                 </p>
               </div>
 
@@ -98,12 +104,14 @@ export const OurLocation = () => {
                 >
                   Hours
                 </h3>
-                <div 
+                <div
                   className="text-gray-700 text-sm sm:text-base space-y-1"
                   style={{ fontFamily: 'Lato, sans-serif' }}
                 >
-                  <p>Monday - Friday: 7:00 AM - 10:00 PM</p>
-                  <p>Saturday - Sunday: 8:00 AM - 11:00 PM</p>
+                  <p><strong>All Locations:</strong></p>
+                  <p>Monday - Friday: 8:00 AM - 11:00 PM</p>
+                  <p>Saturday - Sunday: 8:00 AM - 12:00 AM</p>
+                  <p className="text-xs text-gray-600 mt-2">*Hours may vary by location</p>
                 </div>
               </div>
             </motion.div>
@@ -148,8 +156,8 @@ export const OurLocation = () => {
                 className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg shadow-lg font-medium text-sm transition-all duration-200 hover:bg-white"
                 style={{ fontFamily: 'Lato, sans-serif' }}
                 onClick={() => {
-                  // Open in Google Maps
-                  window.open('https://maps.google.com/?q=123+Main+Street+Dehradun+Uttarakhand+India', '_blank');
+                  // Open in Google Maps for Ahmedabad locations
+                  window.open('https://maps.google.com/?q=TacoTango+Cafe+SG+Highway+Ahmedabad+Gujarat+India', '_blank');
                 }}
               >
                 View in Maps

@@ -32,7 +32,7 @@ export const AboutUs = ({ onLearnMore }: AboutUsProps) => {
           className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl mb-8"
           style={{ fontFamily: 'Lato, sans-serif' }}
         >
-          TacoTango is more than just a restaurant; it's a community hub where taco lovers and food enthusiasts come together. Our journey began with a simple idea: to create a space where authentic Mexican flavors meet a vibrant, welcoming atmosphere. Learn more about our mission, values, and the team behind your favorite tacos.
+          TacoTango is more than just Ahmedabad's premier cafe chain; we're a community hub where taco lovers, coffee enthusiasts, and food connoisseurs come together across Gujarat. Our journey began with a simple idea: to create spaces throughout Ahmedabad where authentic Mexican flavors meet premium coffee culture in a vibrant, welcoming atmosphere. As the top cafe chain in Ahmedabad, learn more about our mission, values, and the passionate team behind your favorite tacos and coffee experiences.
         </motion.p>
 
         {/* Learn More About Us Button */}

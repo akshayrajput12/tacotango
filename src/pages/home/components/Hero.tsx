@@ -20,9 +20,9 @@ export const Hero = () => {
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6"
                 style={{ fontFamily: 'Raleway, sans-serif' }}
               >
-                Crafting Flavors, One Taco at a Time
+                Ahmedabad's Premier Cafe Chain Experience
               </motion.h1>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -30,7 +30,7 @@ export const Hero = () => {
                 className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 text-white/90 max-w-2xl mx-auto"
                 style={{ fontFamily: 'Lato, sans-serif' }}
               >
-                Welcome to TacoTango, where every bite tells a story. Explore our journey, savor our authentic Mexican flavors, and create unforgettable events.
+                Welcome to TacoTango, Ahmedabad's top cafe chain! From authentic Mexican tacos to premium coffee, we're crafting exceptional experiences across Gujarat's vibrant food scene.
               </motion.p>
               
               <motion.button
@@ -59,7 +59,7 @@ export const Hero = () => {
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6"
             style={{ fontFamily: 'Raleway, sans-serif' }}
           >
-            Our Journey
+            Our Journey in Ahmedabad
           </motion.h2>
 
           <motion.p
@@ -69,7 +69,7 @@ export const Hero = () => {
             className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl"
             style={{ fontFamily: 'Lato, sans-serif' }}
           >
-            From a small dream to a bustling hub, TacoTango has been serving the community with passion and dedication. Our journey is filled with stories of friendship, creativity, and the love for authentic Mexican cuisine. Discover how we've grown and what makes us unique.
+            From a single location to Ahmedabad's most beloved cafe chain, TacoTango has been serving Gujarat's vibrant community with passion and dedication. Our journey through Ahmedabad's diverse neighborhoods is filled with stories of friendship, creativity, and the love for authentic Mexican cuisine paired with premium coffee culture. Discover how we've become the top cafe choice across Ahmedabad.
           </motion.p>
         </div>
       </div>

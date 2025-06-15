@@ -1,0 +1,49 @@
+# TacoTango Ahmedabad - Robots.txt
+# Premier Cafe Chain in Ahmedabad, Gujarat, India
+
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl our content
+Allow: /menu
+Allow: /gallery
+Allow: /events
+Allow: /reservation
+Allow: /contact
+Allow: /our-story
+Allow: /customer-stories
+Allow: /faq
+
+# Disallow admin areas
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/
+Disallow: /*.json$
+
+# Allow important assets
+Allow: /logo.png
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+
+# Sitemap location
+Sitemap: https://tacotango.vercel.app/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Additional directives for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
