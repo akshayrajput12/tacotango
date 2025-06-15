@@ -1,70 +1,34 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import ReviewForm from '../../../components/ReviewForm';
 
-export const WriteReviewButton = () => {
+interface WriteReviewButtonProps {
+  onReviewSubmitted?: () => void;
+}
+
+export const WriteReviewButton: React.FC<WriteReviewButtonProps> = ({
+  onReviewSubmitted
+}) => {
   const [showModal, setShowModal] = useState(false);
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [formData, setFormData] = useState({
-    name: '',
-    review: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const handleSuccess = () => {
+    setShowModal(false);
+    setShowSuccessMessage(true);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    // Trigger refresh of reviews list
+    if (onReviewSubmitted) {
+      onReviewSubmitted();
+    }
 
-    // Simulate form submission
+    // Hide success message after 4 seconds
     setTimeout(() => {
-      setIsSubmitting(false);
-      setShowSuccess(true);
-      setFormData({ name: '', review: '' });
-      setRating(0);
-
-      // Hide success message and close modal after 2 seconds
-      setTimeout(() => {
-        setShowSuccess(false);
-        setShowModal(false);
-      }, 2000);
-    }, 1000);
+      setShowSuccessMessage(false);
+    }, 4000);
   };
 
-  const renderStars = () => {
-    return [...Array(5)].map((_, index) => {
-      const starValue = index + 1;
-      return (
-        <motion.button
-          key={index}
-          type="button"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setRating(starValue)}
-          onMouseEnter={() => setHoverRating(starValue)}
-          onMouseLeave={() => setHoverRating(0)}
-          className="text-2xl focus:outline-none transition-colors duration-200"
-        >
-          <span
-            className={`${
-              starValue <= (hoverRating || rating)
-                ? 'text-orange-400'
-                : 'text-gray-300'
-            }`}
-          >
-            ★
-          </span>
-        </motion.button>
-      );
-    });
+  const handleCancel = () => {
+    setShowModal(false);
   };
 
   return (
@@ -75,8 +39,37 @@ export const WriteReviewButton = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex justify-center"
+            className="flex flex-col items-center gap-4"
           >
+            {/* Success Message */}
+            <AnimatePresence>
+              {showSuccessMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -20, scale: 0.9 }}
+                  className="bg-green-50 border border-green-200 rounded-lg p-4 shadow-sm"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                      <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-green-800" style={{ fontFamily: 'Raleway, sans-serif' }}>
+                        Review Submitted Successfully!
+                      </h3>
+                      <p className="text-green-700 text-sm" style={{ fontFamily: 'Lato, sans-serif' }}>
+                        Thank you for sharing your experience. Your review is pending approval.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Write Review Button */}
             <motion.button
               onClick={() => setShowModal(true)}
               whileHover={{ scale: 1.05 }}
@@ -90,145 +83,23 @@ export const WriteReviewButton = () => {
         </div>
       </section>
 
-      {/* Review Modal */}
+      {/* Review Form Modal */}
       <AnimatePresence>
         {showModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-            onClick={() => setShowModal(false)}
-          >
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-              style={{ backgroundColor: '#FCFAF7' }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto"
             >
-              <div className="flex justify-between items-center mb-6">
-                <h2 
-                  className="text-2xl font-bold text-gray-900"
-                  style={{ fontFamily: 'Raleway, sans-serif' }}
-                >
-                  Write Your Review
-                </h2>
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
-                >
-                  ×
-                </button>
-              </div>
-
-              {!showSuccess ? (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name Field */}
-                  <div>
-                    <label 
-                      htmlFor="name" 
-                      className="block text-sm font-medium text-gray-900 mb-2"
-                      style={{ fontFamily: 'Lato, sans-serif' }}
-                    >
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Enter your name"
-                      required
-                      className="w-full px-4 py-3 rounded-lg border-0 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200"
-                      style={{ 
-                        backgroundColor: '#F5F0ED',
-                        fontFamily: 'Lato, sans-serif'
-                      }}
-                    />
-                  </div>
-
-                  {/* Rating */}
-                  <div>
-                    <label 
-                      className="block text-sm font-medium text-gray-900 mb-2"
-                      style={{ fontFamily: 'Lato, sans-serif' }}
-                    >
-                      Rating
-                    </label>
-                    <div className="flex space-x-1">
-                      {renderStars()}
-                    </div>
-                  </div>
-
-                  {/* Review Field */}
-                  <div>
-                    <label 
-                      htmlFor="review" 
-                      className="block text-sm font-medium text-gray-900 mb-2"
-                      style={{ fontFamily: 'Lato, sans-serif' }}
-                    >
-                      Your Review
-                    </label>
-                    <textarea
-                      id="review"
-                      name="review"
-                      value={formData.review}
-                      onChange={handleInputChange}
-                      placeholder="Share your experience..."
-                      required
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-lg border-0 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200 resize-none"
-                      style={{ 
-                        backgroundColor: '#F5F0ED',
-                        fontFamily: 'Lato, sans-serif'
-                      }}
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="flex justify-end space-x-4">
-                    <button
-                      type="button"
-                      onClick={() => setShowModal(false)}
-                      className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium transition-colors duration-200"
-                      style={{ fontFamily: 'Lato, sans-serif' }}
-                    >
-                      Cancel
-                    </button>
-                    <motion.button
-                      type="submit"
-                      disabled={isSubmitting || rating === 0}
-                      whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                      whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-                      className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-6 rounded-full transition-all duration-200 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
-                      style={{ fontFamily: 'Lato, sans-serif' }}
-                    >
-                      {isSubmitting ? 'Submitting...' : 'Submit Review'}
-                    </motion.button>
-                  </div>
-                </form>
-              ) : (
-                <div className="text-center py-8">
-                  <div className="text-green-600 text-5xl mb-4">✓</div>
-                  <h3 
-                    className="text-xl font-semibold text-gray-900 mb-2"
-                    style={{ fontFamily: 'Raleway, sans-serif' }}
-                  >
-                    Thank You!
-                  </h3>
-                  <p 
-                    className="text-gray-700"
-                    style={{ fontFamily: 'Lato, sans-serif' }}
-                  >
-                    Your review has been submitted successfully.
-                  </p>
-                </div>
-              )}
+              <ReviewForm
+                onSuccess={handleSuccess}
+                onCancel={handleCancel}
+                className="shadow-2xl"
+              />
             </motion.div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </>

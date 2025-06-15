@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { goToReservation } from '../../../utils/navigation';
+import { usePublicEvents } from '../../../hooks/useEvents';
+import type { Event as DatabaseEvent } from '../../../services/eventsService';
 
 interface Event {
   id: number;
@@ -31,80 +33,30 @@ export const EventsCalendarAndFeatured = () => {
   const [isSelectingRange, setIsSelectingRange] = useState(false);
   const [filterApplied, setFilterApplied] = useState(false);
 
+  // Use the database hook
+  const { events: databaseEvents, loading, error } = usePublicEvents();
+
   // Get current date for dynamic calendar
   const today = new Date();
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth(); // 0-indexed (June = 5)
 
-  // Enhanced events data with current year dates
-  const events: Event[] = [
-    {
-      id: 1,
-      title: 'Jazz Night',
-      date: `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-15`,
-      time: '7:00 PM - 10:00 PM',
-      type: 'Music',
-      description: 'Join us for a night of live jazz music, featuring local artists and a special menu of cocktails and appetizers.',
-      image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      price: 'Free Entry',
-      category: 'Weekly Event'
-    },
-    {
-      id: 2,
-      title: 'Coffee Tasting Workshop',
-      date: `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-22`,
-      time: '2:00 PM - 4:00 PM',
-      type: 'Workshop',
-      description: 'Learn about different coffee beans, brewing methods, and taste profiles in our interactive workshop led by expert baristas.',
-      image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      price: '₹500 per person',
-      category: 'Workshop'
-    },
-    {
-      id: 3,
-      title: 'Live Acoustic Session',
-      date: `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-28`,
-      time: '8:00 PM - 11:00 PM',
-      type: 'Music',
-      description: 'Intimate acoustic performances by talented local musicians in a cozy atmosphere perfect for music lovers.',
-      image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      price: 'Free Entry',
-      category: 'Music Event'
-    },
-    {
-      id: 4,
-      title: 'Wine & Dine Evening',
-      date: `${currentYear}-${String(currentMonth + 2).padStart(2, '0')}-05`,
-      time: '6:00 PM - 9:00 PM',
-      type: 'Dining',
-      description: 'An elegant evening featuring curated wine pairings with our chef\'s special menu, perfect for a romantic dinner or special celebration.',
-      image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      price: '₹2500 per couple',
-      category: 'Premium Event'
-    },
-    {
-      id: 5,
-      title: 'Art Exhibition Opening',
-      date: `${currentYear}-${String(currentMonth + 2).padStart(2, '0')}-12`,
-      time: '5:00 PM - 8:00 PM',
-      type: 'Art',
-      description: 'Discover local artists and their latest works in our monthly art exhibition featuring paintings, sculptures, and digital art.',
-      image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      price: 'Free Entry',
-      category: 'Art Event'
-    },
-    {
-      id: 6,
-      title: 'Poetry Night',
-      date: `${currentYear}-${String(currentMonth + 2).padStart(2, '0')}-19`,
-      time: '7:30 PM - 9:30 PM',
-      type: 'Literature',
-      description: 'An evening of spoken word poetry, open mic sessions, and literary discussions in a warm, welcoming environment.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      price: 'Free Entry',
-      category: 'Literature Event'
-    },
-  ];
+  // Transform database events to match the component's expected format
+  const transformDatabaseEvent = (dbEvent: DatabaseEvent): Event => ({
+    id: parseInt(dbEvent.id),
+    title: dbEvent.title,
+    date: dbEvent.date,
+    time: dbEvent.time,
+    type: dbEvent.type,
+    description: dbEvent.description,
+    image: dbEvent.image,
+    price: dbEvent.price,
+    category: dbEvent.category
+  });
+
+  // Use database events only
+  const events: Event[] = databaseEvents.map(transformDatabaseEvent);
+
 
   // Generate dynamic months starting from current month
   const generateMonths = () => {
@@ -537,6 +489,21 @@ export const EventsCalendarAndFeatured = () => {
             {filterApplied && startDate && endDate ? 'Filtered Events' : 'Featured Events'}
           </motion.h2>
 
+          {/* Loading State */}
+          {loading && (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && events.length === 0 && (
+            <div className="text-center py-8">
+              <p className="text-gray-600 mb-4">Unable to load events from database.</p>
+              <p className="text-sm text-gray-500">Please check your connection or try again later.</p>
+            </div>
+          )}
+
           {filterApplied && startDate && endDate && (
             <motion.p
               initial={{ opacity: 0, scale: 0.9 }}
@@ -547,6 +514,22 @@ export const EventsCalendarAndFeatured = () => {
             >
               Showing events from {months[startDate.month]?.name.split(' ')[0]} {startDate.date} to {months[endDate.month]?.name.split(' ')[0]} {endDate.date}
             </motion.p>
+          )}
+
+          {/* No Events State */}
+          {!loading && events.length === 0 && (
+            <div className="text-center py-16">
+              <div className="max-w-md mx-auto">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">No Events Available</h3>
+                <p className="text-gray-600 mb-4">There are currently no events to display.</p>
+                <p className="text-sm text-gray-500">Add events through the admin panel to see them here.</p>
+              </div>
+            </div>
           )}
 
           <div className="space-y-8">

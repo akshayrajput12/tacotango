@@ -16,7 +16,8 @@ export const routes = {
   menu: '/menu',
   customerStories: '/customer-stories',
   contact: '/contact',
-  faq: '/faq'
+  faq: '/faq',
+  admin: '/admin'
 } as const;
 
 // Helper functions for common navigation actions
@@ -29,3 +30,4 @@ export const goToMenu = () => navigateTo(routes.menu);
 export const goToCustomerStories = () => navigateTo(routes.customerStories);
 export const goToContact = () => navigateTo(routes.contact);
 export const goToFAQ = () => navigateTo(routes.faq);
+export const goToAdmin = () => navigateTo(routes.admin);

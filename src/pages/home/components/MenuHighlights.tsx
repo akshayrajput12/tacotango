@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { goToMenu } from '../../../utils/navigation';
+import { usePublicMenu } from '../../../hooks/useMenu';
+import type { MenuItem } from '../../../services/menuService';
 
+// Legacy interface for backward compatibility
 interface MenuItemType {
   title: string;
   description: string;
@@ -13,6 +16,18 @@ interface MenuItemType {
   rating: number;
 }
 
+// Transform MenuItem to MenuItemType for component compatibility
+const transformToLegacyFormat = (item: MenuItem): MenuItemType => ({
+  title: item.name,
+  description: item.description,
+  image: item.image,
+  price: `₹${item.price}`,
+  ingredients: item.ingredients,
+  prepTime: item.prepTime,
+  calories: item.calories,
+  rating: item.rating
+});
+
 export const MenuHighlights: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [itemsPerView, setItemsPerView] = useState<number>(4);
@@ -20,7 +35,14 @@ export const MenuHighlights: React.FC = () => {
   const [touchStart, setTouchStart] = useState<number>(0);
   const [touchEnd, setTouchEnd] = useState<number>(0);
 
-  const menuItems: MenuItemType[] = [
+  // Use the database hook
+  const { featuredItems, loading, error } = usePublicMenu();
+
+  // Transform database items to legacy format for component compatibility
+  const menuItems: MenuItemType[] = featuredItems.map(transformToLegacyFormat);
+
+  // Fallback data in case no featured items are available
+  const fallbackMenuItems: MenuItemType[] = [
     {
       title: "Artisan Coffee",
       description: "Our coffee is sourced from the finest beans, roasted to perfection, and crafted with care.",
@@ -50,48 +72,11 @@ export const MenuHighlights: React.FC = () => {
       prepTime: "8-10 mins",
       calories: 450,
       rating: 4.7
-    },
-    {
-      title: "Sweet Treats",
-      description: "Delicious desserts and cakes made fresh daily with premium ingredients.",
-      image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      price: "₹420",
-      ingredients: ["Belgian Chocolate", "Fresh Cream", "Seasonal Berries"],
-      prepTime: "5-7 mins",
-      calories: 380,
-      rating: 4.9
-    },
-    {
-      title: "Healthy Options",
-      description: "Fresh salads and nutritious bowls for a wholesome dining experience.",
-      image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      price: "₹560",
-      ingredients: ["Organic Greens", "Quinoa", "Avocado", "Nuts & Seeds"],
-      prepTime: "5-6 mins",
-      calories: 320,
-      rating: 4.6
-    },
-    {
-      title: "Specialty Drinks",
-      description: "Unique beverages crafted with premium ingredients and creative flair.",
-      image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      price: "₹480",
-      ingredients: ["Fresh Fruits", "Herbs", "Sparkling Water", "Natural Syrups"],
-      prepTime: "4-6 mins",
-      calories: 150,
-      rating: 4.8
-    },
-    {
-      title: "Breakfast Specials",
-      description: "Start your day right with our hearty breakfast options and fresh ingredients.",
-      image: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      price: "₹740",
-      ingredients: ["Farm Eggs", "Artisan Bread", "Fresh Herbs", "Seasonal Vegetables"],
-      prepTime: "10-12 mins",
-      calories: 520,
-      rating: 4.7
     }
   ];
+
+  // Use database items if available, otherwise fallback
+  const displayItems = menuItems.length > 0 ? menuItems : fallbackMenuItems;
 
   // Responsive items per view calculation
   const getItemsPerView = (): number => {
@@ -109,7 +94,7 @@ export const MenuHighlights: React.FC = () => {
       setItemsPerView(newItemsPerView);
 
       // Reset to valid index if needed
-      const maxIndex = Math.max(0, menuItems.length - newItemsPerView);
+      const maxIndex = Math.max(0, displayItems.length - newItemsPerView);
       if (currentIndex > maxIndex) {
         setCurrentIndex(maxIndex);
       }
@@ -118,10 +103,10 @@ export const MenuHighlights: React.FC = () => {
     handleResize(); // Initial setup
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [currentIndex, menuItems.length]);
+  }, [currentIndex, displayItems.length]);
 
   // Navigation functions
-  const maxIndex = Math.max(0, menuItems.length - itemsPerView);
+  const maxIndex = Math.max(0, displayItems.length - itemsPerView);
 
   const handleNext = (): void => {
     if (currentIndex < maxIndex) {
@@ -170,6 +155,58 @@ export const MenuHighlights: React.FC = () => {
     return `translateX(-${currentIndex * cardWidth}%)`;
   };
 
+  // Show loading state
+  if (loading) {
+    return (
+      <section className="relative px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32 2xl:px-40">
+        <div className="mt-6 mb-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-6"
+            style={{ fontFamily: 'Raleway, sans-serif' }}
+          >
+            Menu Highlights
+          </motion.h2>
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Show error state with fallback
+  if (error && displayItems.length === 0) {
+    return (
+      <section className="relative px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32 2xl:px-40">
+        <div className="mt-6 mb-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-6"
+            style={{ fontFamily: 'Raleway, sans-serif' }}
+          >
+            Menu Highlights
+          </motion.h2>
+          <div className="text-center py-8">
+            <p className="text-gray-600 mb-4">Unable to load menu items. Please try again later.</p>
+            <motion.button
+              onClick={goToMenu}
+              className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-6 rounded-full transition-all duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Full Menu
+            </motion.button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="relative px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32 2xl:px-40">
       <div className="mt-6 mb-8">
@@ -180,7 +217,7 @@ export const MenuHighlights: React.FC = () => {
           className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-6"
           style={{ fontFamily: 'Raleway, sans-serif' }}
         >
-          Menu Highlights
+          Menu Highlights {!loading && featuredItems.length === 0 && <span className="text-sm text-gray-500">(Sample Items)</span>}
         </motion.h2>
 
         {/* Carousel Container */}
@@ -222,7 +259,7 @@ export const MenuHighlights: React.FC = () => {
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              {menuItems.map((item, index) => (
+              {displayItems.map((item, index) => (
                 <motion.div
                   key={item.title}
                   className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer flex-shrink-0 border border-gray-100 w-full"

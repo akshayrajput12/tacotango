@@ -1,81 +1,108 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { goToReservation } from '../../../utils/navigation';
+import { useFeaturedSpecialOffers } from '../../../hooks/useSpecialOffers';
 
 export const SpecialOffers = () => {
-  const [expandedOffer, setExpandedOffer] = useState<number | null>(null);
-  const offers = [
-    {
-      id: 1,
-      title: 'Happy Hour',
-      description: 'Enjoy discounted drinks and appetizers every weekday from 4 PM to 6 PM.',
-      image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      bgColor: 'bg-amber-50',
-      borderColor: 'border-amber-200',
-      textColor: 'text-amber-800',
-      buttonColor: 'bg-amber-600 hover:bg-amber-700',
-      details: {
-        timing: 'Monday to Friday, 4:00 PM - 6:00 PM',
-        discount: '25% off on all beverages and 20% off on appetizers',
-        validUntil: 'Valid until December 31, 2024',
-        terms: [
-          'Valid only during specified hours',
-          'Cannot be combined with other offers',
-          'Dine-in only',
-          'Subject to availability'
-        ],
-        popularItems: ['Craft Beer', 'Wine Selection', 'Nachos', 'Wings', 'Bruschetta']
-      }
-    },
-    {
-      id: 2,
-      title: 'Student Discount',
-      description: 'Students get 10% off their entire order with a valid student ID.',
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      bgColor: 'bg-orange-50',
-      borderColor: 'border-orange-200',
-      textColor: 'text-orange-800',
-      buttonColor: 'bg-orange-600 hover:bg-orange-700',
-      details: {
-        timing: 'Available all day, every day',
-        discount: '10% off on entire bill',
-        validUntil: 'Valid throughout the academic year',
-        terms: [
-          'Valid student ID required',
-          'One discount per student per visit',
-          'Cannot be combined with other offers',
-          'Valid for undergraduate and graduate students'
-        ],
-        popularItems: ['Coffee & Pastries', 'Study Combo Meals', 'Group Study Packages', 'Late Night Snacks']
-      }
-    },
-    {
-      id: 3,
-      title: 'Loyalty Program',
-      description: 'Join our loyalty program and earn points for every purchase. Redeem points for discounts and free items.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      bgColor: 'bg-rose-50',
-      borderColor: 'border-rose-200',
-      textColor: 'text-rose-800',
-      buttonColor: 'bg-rose-600 hover:bg-rose-700',
-      details: {
-        timing: 'Earn points with every purchase',
-        discount: 'Earn 1 point per ₹10 spent',
-        validUntil: 'Points never expire',
-        terms: [
-          '100 points = ₹50 discount',
-          'Birthday bonus: 2x points',
-          'Referral bonus: 50 points',
-          'VIP status at 1000 points'
-        ],
-        popularItems: ['Free Coffee (200 pts)', 'Free Dessert (300 pts)', 'Free Meal (500 pts)', 'VIP Experience (1000 pts)']
-      }
-    }
-  ];
+  const [expandedOffer, setExpandedOffer] = useState<string | null>(null);
 
-  const toggleExpanded = (offerId: number) => {
+  // Use the database hook for featured offers
+  const { offers: databaseOffers, loading, error } = useFeaturedSpecialOffers();
+
+  // Transform database offers to match the expected format
+  const offers = databaseOffers.map(offer => ({
+    id: offer.id,
+    title: offer.title,
+    description: offer.description,
+    image: offer.image,
+    bgColor: offer.bgColor,
+    borderColor: offer.borderColor,
+    textColor: offer.textColor,
+    buttonColor: offer.buttonColor,
+    details: {
+      timing: offer.timing,
+      discount: offer.discount,
+      validUntil: `Valid until ${new Date(offer.validUntil).toLocaleDateString()}`,
+      terms: offer.terms,
+      popularItems: offer.popularItems
+    }
+  }));
+
+  // Use database offers or show empty state
+  const displayOffers = offers.length > 0 ? offers : [];
+
+  const toggleExpanded = (offerId: string) => {
     setExpandedOffer(expandedOffer === offerId ? null : offerId);
   };
+
+  // Show loading state
+  if (loading) {
+    return (
+      <motion.section
+        className="relative px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32 2xl:px-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="mt-12 mb-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              color: '#2c1810'
+            }}
+          >
+            Special Offers
+          </motion.h2>
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+          </div>
+        </div>
+      </motion.section>
+    );
+  }
+
+  // Show empty state if no offers
+  if (!loading && displayOffers.length === 0) {
+    return (
+      <motion.section
+        className="relative px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32 2xl:px-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="mt-12 mb-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              color: '#2c1810'
+            }}
+          >
+            Special Offers
+          </motion.h2>
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No Special Offers Available</h3>
+              <p className="text-gray-600 mb-4">Check back soon for exciting deals and promotions!</p>
+              <p className="text-sm text-gray-500">New offers are added through the admin panel.</p>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+    );
+  }
 
   return (
     <motion.section
@@ -85,6 +112,12 @@ export const SpecialOffers = () => {
       transition={{ duration: 0.8 }}
     >
       <div className="mt-12 mb-8">
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+            <p className="text-red-700">Error loading offers: {error}</p>
+          </div>
+        )}
+
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -99,7 +132,7 @@ export const SpecialOffers = () => {
         </motion.h2>
 
         <div className="space-y-8">
-          {offers.map((offer, index) => (
+          {displayOffers.map((offer, index) => (
             <motion.div
               key={offer.id}
               initial={{ opacity: 0, y: 50, scale: 0.9 }}

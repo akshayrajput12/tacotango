@@ -1,15 +1,16 @@
 import { motion } from 'framer-motion';
 
 interface MenuCategoriesProps {
+  categories?: string[];
   activeCategory: string;
   onCategoryChange: (category: string) => void;
 }
 
 export const MenuCategories: React.FC<MenuCategoriesProps> = ({
+  categories = ['Breakfast', 'Lunch', 'Dinner', 'Drinks'],
   activeCategory,
   onCategoryChange
 }) => {
-  const categories = ['Breakfast', 'Lunch', 'Dinner', 'Drinks'];
 
   return (
     <motion.div

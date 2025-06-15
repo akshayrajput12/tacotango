@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
+import { useCreateReservation } from '../../hooks/useReservations';
 
 // Icon Components
 const ChevronLeftIcon = () => (
@@ -115,9 +116,13 @@ interface BookingConfirmationProps {
   isOpen: boolean;
   onClose: () => void;
   bookingData: {
+    customerName: string;
+    customerEmail: string;
+    customerPhone: string;
     date: string;
     time: string;
     guests: string;
+    confirmationCode?: string;
   };
 }
 
@@ -205,8 +210,29 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({ isOpen, onClo
               fontSize: '1rem'
             }}
           >
-            Your table has been successfully reserved at Cafex. We look forward to serving you!
+            Thank you {bookingData.customerName}! Your table has been successfully reserved at Cafex. We look forward to serving you!
           </motion.p>
+
+          {/* Confirmation Code */}
+          {bookingData.confirmationCode && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+              className="text-center mb-6 p-3 rounded-lg"
+              style={{
+                background: 'linear-gradient(135deg, rgba(222, 181, 154, 0.2) 0%, rgba(203, 180, 163, 0.2) 100%)',
+                border: '1px solid rgba(203, 180, 163, 0.3)'
+              }}
+            >
+              <p className="text-sm" style={{ color: '#8b7355', fontFamily: 'Lato, sans-serif' }}>
+                Confirmation Code
+              </p>
+              <p className="text-xl font-bold" style={{ color: '#4a3728', fontFamily: 'Raleway, sans-serif' }}>
+                {bookingData.confirmationCode}
+              </p>
+            </motion.div>
+          )}
 
           {/* Booking Details */}
           <motion.div
@@ -219,6 +245,18 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({ isOpen, onClo
               border: '1px solid rgba(203, 180, 163, 0.2)'
             }}
           >
+            <div className="flex justify-between items-center">
+              <span style={{ color: '#8b7355', fontWeight: '500', fontFamily: 'Lato, sans-serif' }}>Name:</span>
+              <span style={{ color: '#4a3728', fontWeight: '600', fontFamily: 'Lato, sans-serif' }}>{bookingData.customerName}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span style={{ color: '#8b7355', fontWeight: '500', fontFamily: 'Lato, sans-serif' }}>Email:</span>
+              <span style={{ color: '#4a3728', fontWeight: '600', fontFamily: 'Lato, sans-serif' }}>{bookingData.customerEmail}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span style={{ color: '#8b7355', fontWeight: '500', fontFamily: 'Lato, sans-serif' }}>Phone:</span>
+              <span style={{ color: '#4a3728', fontWeight: '600', fontFamily: 'Lato, sans-serif' }}>{bookingData.customerPhone}</span>
+            </div>
             <div className="flex justify-between items-center">
               <span style={{ color: '#8b7355', fontWeight: '500', fontFamily: 'Lato, sans-serif' }}>Date:</span>
               <span style={{ color: '#4a3728', fontWeight: '600', fontFamily: 'Lato, sans-serif' }}>{formatDisplayDate(bookingData.date)}</span>
@@ -307,16 +345,28 @@ const ReservationHero = () => (
 
 export const ReservationPage = () => {
   const [formData, setFormData] = useState({
+    customerName: '',
+    customerEmail: '',
+    customerPhone: '',
     date: '',
     time: '',
-    guests: ''
+    guests: '',
+    specialRequests: '',
+    dietaryRestrictions: '',
+    occasion: '',
+    seatingPreference: '',
+    marketingConsent: false
   });
 
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const [calendarDate, setCalendarDate] = useState(new Date());
   const [showBookingConfirmation, setShowBookingConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [confirmationCode, setConfirmationCode] = useState<string>('');
   const calendarRef = useRef<HTMLDivElement>(null);
+
+  // Use the database hook
+  const { createReservation, loading: createLoading, error: createError } = useCreateReservation();
 
   const timeSlots = [
     '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM',
@@ -337,20 +387,9 @@ export const ReservationPage = () => {
   };
 
   const handleBookTable = async () => {
-    if (formData.date && formData.time && formData.guests) {
-      setIsSubmitting(true);
-
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
-      setIsSubmitting(false);
-      setShowBookingConfirmation(true);
-
-      // Reset form after successful booking
-      setTimeout(() => {
-        setFormData({ date: '', time: '', guests: '' });
-      }, 2000);
-    } else {
+    // Validate required fields
+    if (!formData.customerName || !formData.customerEmail || !formData.customerPhone ||
+        !formData.date || !formData.time || !formData.guests) {
       // Show validation errors with animation
       const emptyFields = document.querySelectorAll('.field-group');
       emptyFields.forEach((field, index) => {
@@ -359,6 +398,53 @@ export const ReservationPage = () => {
           setTimeout(() => field.classList.remove('shake'), 500);
         }, index * 100);
       });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Create reservation in database
+      const reservation = await createReservation({
+        customerName: formData.customerName,
+        customerEmail: formData.customerEmail,
+        customerPhone: formData.customerPhone,
+        date: formData.date,
+        time: formData.time,
+        guests: parseInt(formData.guests.split(' ')[0]), // Extract number from "X Guests"
+        status: 'pending',
+        specialRequests: formData.specialRequests || undefined,
+        dietaryRestrictions: formData.dietaryRestrictions || undefined,
+        occasion: formData.occasion || undefined,
+        seatingPreference: formData.seatingPreference || undefined,
+        preferredContactMethod: 'email',
+        marketingConsent: formData.marketingConsent
+      });
+
+      setConfirmationCode(reservation.confirmationCode);
+      setShowBookingConfirmation(true);
+
+      // Reset form after successful booking
+      setTimeout(() => {
+        setFormData({
+          customerName: '',
+          customerEmail: '',
+          customerPhone: '',
+          date: '',
+          time: '',
+          guests: '',
+          specialRequests: '',
+          dietaryRestrictions: '',
+          occasion: '',
+          seatingPreference: '',
+          marketingConsent: false
+        });
+      }, 2000);
+    } catch (error) {
+      console.error('Error creating reservation:', error);
+      alert('Failed to create reservation. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -475,12 +561,86 @@ export const ReservationPage = () => {
           <h2>Reserve a Table</h2>
 
           <div className="fields">
-            {/* Date Field */}
+            {/* Customer Name Field */}
+            <motion.div
+              className="field-group"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.05 }}
+            >
+              <label htmlFor="customer-name">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Full Name
+              </label>
+              <input
+                id="customer-name"
+                type="text"
+                value={formData.customerName}
+                onChange={(e) => handleInputChange('customerName', e.target.value)}
+                placeholder="Enter your full name"
+                className="text-input"
+                required
+              />
+            </motion.div>
+
+            {/* Customer Email Field */}
+            <motion.div
+              className="field-group"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.075 }}
+            >
+              <label htmlFor="customer-email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                Email Address
+              </label>
+              <input
+                id="customer-email"
+                type="email"
+                value={formData.customerEmail}
+                onChange={(e) => handleInputChange('customerEmail', e.target.value)}
+                placeholder="Enter your email address"
+                className="text-input"
+                required
+              />
+            </motion.div>
+
+            {/* Customer Phone Field */}
             <motion.div
               className="field-group"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
+            >
+              <label htmlFor="customer-phone">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                Phone Number
+              </label>
+              <input
+                id="customer-phone"
+                type="tel"
+                value={formData.customerPhone}
+                onChange={(e) => handleInputChange('customerPhone', e.target.value)}
+                placeholder="Enter your phone number"
+                className="text-input"
+                required
+              />
+            </motion.div>
+
+            {/* Date Field */}
+            <motion.div
+              className="field-group"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.125 }}
             >
               <label htmlFor="res-date">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -525,7 +685,7 @@ export const ReservationPage = () => {
               className="field-group"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.15 }}
             >
               <label htmlFor="res-time">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -548,7 +708,7 @@ export const ReservationPage = () => {
               className="field-group"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.175 }}
             >
               <label htmlFor="res-guests">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b7355" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -594,7 +754,10 @@ export const ReservationPage = () => {
         <BookingConfirmation
           isOpen={showBookingConfirmation}
           onClose={() => setShowBookingConfirmation(false)}
-          bookingData={formData}
+          bookingData={{
+            ...formData,
+            confirmationCode
+          }}
         />
       </section>
 
@@ -636,6 +799,37 @@ export const ReservationPage = () => {
         .input-wrapper {
           position: relative;
           width: 100%;
+        }
+
+        /* Text input styling */
+        .text-input {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          font-size: 1rem;
+          border: 2px solid #e3d8cf;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+          color: #333;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          font-family: 'Lato', sans-serif;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .text-input:hover {
+          border-color: #d4c4b8;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          transform: translateY(-1px);
+        }
+
+        .text-input:focus {
+          outline: none;
+          border-color: #cbb4a3;
+          box-shadow: 0 0 0 3px rgba(203, 180, 163, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
+          transform: translateY(-1px);
+        }
+
+        .text-input::placeholder {
+          color: #999;
         }
 
         /* Date input styling */

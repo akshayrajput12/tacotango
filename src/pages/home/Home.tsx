@@ -1,5 +1,6 @@
 import { Hero, MenuHighlights, UpcomingEvents, InstagramFeed, BookTableSection, AboutUs, FAQ } from './components';
 import { Gallery } from '../../components';
+import { CustomerReviews } from '../../components/CustomerReviews';
 import { goToGallery, goToReservation, goToOurStory, goToFAQ } from '../../utils/navigation';
 
 export const Home = () => {
@@ -31,6 +32,7 @@ export const Home = () => {
         onViewAll={handleViewAllGallery}
       />
       <InstagramFeed />
+      <CustomerReviews />
       <BookTableSection onBookTable={handleBookTable} />
       <AboutUs onLearnMore={handleLearnMore} />
       <FAQ onViewFAQs={handleViewFAQs} />

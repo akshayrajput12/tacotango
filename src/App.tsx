@@ -9,6 +9,7 @@ import { MenuPage } from './pages/menu';
 import { CustomerStoriesPage } from './pages/customer-stories';
 import { ContactPage } from './pages/contact';
 import { FAQPage } from './pages/faq';
+import { Admin, AuthProvider } from './admin';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -18,7 +19,13 @@ function App() {
     const handleRouteChange = () => {
       const path = window.location.pathname;
 
-      // Route mapping
+      // Check if it's an admin route
+      if (path.startsWith('/admin')) {
+        setCurrentPage('admin');
+        return;
+      }
+
+      // Route mapping for public pages
       const routes: { [key: string]: string } = {
         '/': 'home',
         '/reservation': 'reservation',
@@ -53,6 +60,8 @@ function App() {
 
   const renderPage = () => {
     switch (currentPage) {
+      case 'admin':
+        return <Admin />;
       case 'reservation':
         return <ReservationPage />;
       case 'gallery':
@@ -74,12 +83,23 @@ function App() {
     }
   };
 
+  // Don't render Navigation and Footer for admin pages
+  if (currentPage === 'admin') {
+    return (
+      <AuthProvider>
+        {renderPage()}
+      </AuthProvider>
+    );
+  }
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FCFAF7' }}>
-      <Navigation />
-      {renderPage()}
-      <Footer />
-    </div>
+    <AuthProvider>
+      <div className="min-h-screen" style={{ backgroundColor: '#FCFAF7' }}>
+        <Navigation />
+        {renderPage()}
+        <Footer />
+      </div>
+    </AuthProvider>
   );
 }
 

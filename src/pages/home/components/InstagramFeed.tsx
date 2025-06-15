@@ -1,84 +1,29 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { usePublicInstagram } from '../../../hooks/useInstagram';
+import type { InstagramPost as DatabaseInstagramPost } from '../../../services/instagramService';
+
+// Transform database post to match component's expected format
+const transformToLegacyFormat = (post: DatabaseInstagramPost) => ({
+  id: post.id, // Keep as string UUID instead of converting to integer
+  src: post.image,
+  title: post.title,
+  description: post.description,
+  instagramUrl: post.instagramUrl,
+  likes: post.likes,
+  comments: post.comments
+});
 
 export const InstagramFeed = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  const instagramPosts = [
-    {
-      id: 1,
-      src: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Perfect Latte Art",
-      description: "Starting the day with beautiful coffee art and premium beans. Our skilled baristas create stunning designs that make every cup a work of art. ☕✨",
-      instagramUrl: "https://www.instagram.com/p/example1/",
-      likes: 234,
-      comments: 12
-    },
-    {
-      id: 2,
-      src: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Fresh Pastries",
-      description: "Delicious croissants and pastries baked fresh daily in our kitchen. Made with the finest ingredients and traditional techniques. 🥐🧡",
-      instagramUrl: "https://www.instagram.com/p/example2/",
-      likes: 189,
-      comments: 8
-    },
-    {
-      id: 3,
-      src: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Cozy Interior",
-      description: "Our warm and inviting dining space designed for relaxation and great conversations. Perfect ambiance for any occasion. 🏠💫",
-      instagramUrl: "https://www.instagram.com/p/example3/",
-      likes: 156,
-      comments: 15
-    },
-    {
-      id: 4,
-      src: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Coffee Beans",
-      description: "Premium quality beans roasted to perfection daily. Sourced directly from sustainable farms around the world. 🌍☕",
-      instagramUrl: "https://www.instagram.com/p/example4/",
-      likes: 298,
-      comments: 22
-    },
-    {
-      id: 5,
-      src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Gourmet Burger",
-      description: "Our signature burger with fresh local ingredients, artisanal bun, and house-made sauces. A true culinary masterpiece! 🍔🔥",
-      instagramUrl: "https://www.instagram.com/p/example5/",
-      likes: 342,
-      comments: 28
-    },
-    {
-      id: 6,
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Happy Customers",
-      description: "Creating memorable dining experiences every day. Nothing makes us happier than seeing our guests enjoy their time here. 😊❤️",
-      instagramUrl: "https://www.instagram.com/p/example6/",
-      likes: 167,
-      comments: 19
-    },
-    {
-      id: 7,
-      src: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Elegant Dining",
-      description: "Fine dining experience in a sophisticated atmosphere. Perfect for special occasions and romantic evenings. 🍽️✨",
-      instagramUrl: "https://www.instagram.com/p/example7/",
-      likes: 278,
-      comments: 31
-    },
-    {
-      id: 8,
-      src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      title: "Weekend Brunch",
-      description: "Special weekend brunch menu with artisanal dishes, fresh ingredients, and creative presentations. Join us every weekend! 🥞🍳",
-      instagramUrl: "https://www.instagram.com/p/example8/",
-      likes: 203,
-      comments: 16
-    }
-  ];
+  // Use the database hook
+  const { featuredPosts, loading, error } = usePublicInstagram();
+
+  // Use database posts only
+  const instagramPosts = featuredPosts.map(transformToLegacyFormat);
+
 
   const itemsPerView = window.innerWidth >= 1024 ? 5 : window.innerWidth >= 768 ? 4 : window.innerWidth >= 640 ? 3 : 2;
   const maxIndex = Math.max(0, instagramPosts.length - itemsPerView);
@@ -143,6 +88,20 @@ export const InstagramFeed = () => {
         >
           Instagram
         </motion.h2>
+
+        {/* Loading State */}
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+          </div>
+        ) : instagramPosts.length === 0 ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <p className="text-gray-500 mb-2">No Instagram posts available</p>
+              <p className="text-sm text-gray-400">Add featured posts in the admin panel to display them here</p>
+            </div>
+          </div>
+        ) : (
 
         <div
           className="relative"
@@ -281,6 +240,7 @@ export const InstagramFeed = () => {
             </AnimatePresence>
           </div>
         </div>
+        )}
       </div>
     </section>
   );

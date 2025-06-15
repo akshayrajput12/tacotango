@@ -1,0 +1,8 @@
+export { AdminDashboard } from './AdminDashboard'
+export { EventsManagement } from './EventsManagement'
+export { MenuManagement } from './MenuManagement'
+export { InstagramManagement } from './InstagramManagement'
+export { GalleryManagement } from './GalleryManagement'
+export { OffersManagement } from './OffersManagement'
+export { BookingsManagement } from './BookingsManagement'
+export { ReviewsManagement } from './ReviewsManagement'
