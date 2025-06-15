@@ -335,7 +335,7 @@ const ReservationHero = () => (
             className="text-sm sm:text-base md:text-lg text-white/90 max-w-2xl mx-auto"
             style={{ fontFamily: 'Lato, sans-serif' }}
           >
-            Book your perfect dining experience at Cafex. Select your preferred date, time, and party size for an unforgettable culinary journey.
+            Book your perfect dining experience at TacoTango. Select your preferred date, time, and party size for an unforgettable culinary journey.
           </motion.p>
         </div>
       </div>

@@ -25,9 +25,9 @@ const WhatMakesUsUnique: React.FC = () => {
               className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl"
               style={{ fontFamily: 'Lato, sans-serif' }}
             >
-              At The Daily Grind, we go beyond just serving coffee and food. We offer a curated experience that combines exceptional
-              quality, a welcoming atmosphere, and a commitment to sustainability. Our unique selling points include our signature coffee
-              blends, locally sourced ingredients, community events, and personalized service.
+              At TacoTango, we go beyond just serving tacos and Mexican food. We offer a curated experience that combines exceptional
+              quality, a vibrant atmosphere, and a commitment to sustainability. Our unique selling points include our authentic Mexican
+              recipes, locally sourced ingredients, community events, and personalized service.
             </motion.p>
           </div>
         </div>

@@ -87,11 +87,11 @@ export const Footer = () => {
           >
             <img
               src="/logo.png"
-              alt="Cafex Logo"
+              alt="TacoTango Logo"
               className="w-10 h-10 object-contain"
             />
             <span className="text-xl font-semibold hover:opacity-80 transition-opacity duration-200" style={{ color: '#96664F', fontFamily: 'Raleway, sans-serif' }}>
-              Cafex
+              TacoTango
             </span>
           </motion.button>
         </motion.div>
@@ -155,7 +155,7 @@ export const Footer = () => {
           className="text-center"
         >
           <p className="text-sm" style={{ color: '#96664F', fontFamily: 'Lato, sans-serif' }}>
-            © 2024 Cafex. All rights reserved.
+            © 2024 TacoTango. All rights reserved.
           </p>
         </motion.div>
       </div>

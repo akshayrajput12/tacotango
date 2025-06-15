@@ -32,7 +32,7 @@ export const AboutUs = ({ onLearnMore }: AboutUsProps) => {
           className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl mb-8"
           style={{ fontFamily: 'Lato, sans-serif' }}
         >
-          The Daily Grind is more than just a cafe; it's a community hub where coffee lovers and food enthusiasts come together. Our journey began with a simple idea: to create a space where quality coffee meets a warm, inviting atmosphere. Learn more about our mission, values, and the team behind your favorite brews.
+          TacoTango is more than just a restaurant; it's a community hub where taco lovers and food enthusiasts come together. Our journey began with a simple idea: to create a space where authentic Mexican flavors meet a vibrant, welcoming atmosphere. Learn more about our mission, values, and the team behind your favorite tacos.
         </motion.p>
 
         {/* Learn More About Us Button */}

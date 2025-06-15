@@ -38,7 +38,7 @@ const MeetTheTeam: React.FC = () => {
                 <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mx-auto rounded-full overflow-hidden shadow-lg">
                   <img
                     src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
-                    alt="Sarah - Co-founder & Barista"
+                    alt="Maria - Co-founder & Head Chef"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -47,10 +47,10 @@ const MeetTheTeam: React.FC = () => {
                 whileHover={{ color: "#d97706" }}
                 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1"
               >
-                Sarah
+                Maria
               </motion.h3>
               <p className="text-sm sm:text-base text-gray-600">
-                Co-founder & Barista
+                Co-founder & Head Chef
               </p>
             </motion.div>
 
@@ -70,7 +70,7 @@ const MeetTheTeam: React.FC = () => {
                 <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mx-auto rounded-full overflow-hidden shadow-lg">
                   <img
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
-                    alt="David - Co-founder & Chef"
+                    alt="Carlos - Co-founder & Manager"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -79,10 +79,10 @@ const MeetTheTeam: React.FC = () => {
                 whileHover={{ color: "#d97706" }}
                 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1"
               >
-                David
+                Carlos
               </motion.h3>
               <p className="text-sm sm:text-base text-gray-600">
-                Co-founder & Chef
+                Co-founder & Manager
               </p>
             </motion.div>
 
@@ -102,7 +102,7 @@ const MeetTheTeam: React.FC = () => {
                 <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mx-auto rounded-full overflow-hidden shadow-lg">
                   <img
                     src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
-                    alt="Emily - Head Barista"
+                    alt="Sofia - Kitchen Manager"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -111,10 +111,10 @@ const MeetTheTeam: React.FC = () => {
                 whileHover={{ color: "#d97706" }}
                 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1"
               >
-                Emily
+                Sofia
               </motion.h3>
               <p className="text-sm sm:text-base text-gray-600">
-                Head Barista
+                Kitchen Manager
               </p>
             </motion.div>
 
@@ -134,7 +134,7 @@ const MeetTheTeam: React.FC = () => {
                 <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mx-auto rounded-full overflow-hidden shadow-lg">
                   <img
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
-                    alt="Mark - Sous Chef"
+                    alt="Diego - Sous Chef"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -143,7 +143,7 @@ const MeetTheTeam: React.FC = () => {
                 whileHover={{ color: "#d97706" }}
                 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1"
               >
-                Mark
+                Diego
               </motion.h3>
               <p className="text-sm sm:text-base text-gray-600">
                 Sous Chef

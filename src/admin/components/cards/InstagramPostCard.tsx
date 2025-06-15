@@ -412,7 +412,7 @@ export const InstagramPostCard: React.FC<InstagramPostCardProps> = ({
             onChange={(e) => setFormData(prev => ({ ...prev, hashtags: e.target.value.split(', ').filter(Boolean) }))}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             style={{ fontFamily: 'Lato, sans-serif' }}
-            placeholder="#coffee, #cafex, #barista, #latte"
+            placeholder="#tacos, #tacotango, #mexican, #authentic"
           />
         </div>
 

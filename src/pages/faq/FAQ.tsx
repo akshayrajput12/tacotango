@@ -48,7 +48,7 @@ export const FAQPage = () => {
       },
       {
         question: 'How can I contact you?',
-        answer: 'You can contact us by phone at (555) 123-4567, email us at info@cafex.com, or visit us in person. We are also active on social media for quick questions and updates.'
+        answer: 'You can contact us by phone at (555) 123-4567, email us at info@tacotango.com, or visit us in person. We are also active on social media for quick questions and updates.'
       }
     ]
   };
@@ -116,7 +116,7 @@ export const FAQPage = () => {
                   Call Us: (555) 123-4567
                 </motion.a>
                 <motion.a
-                  href="mailto:info@cafex.com"
+                  href="mailto:info@tacotango.com"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 bg-white hover:bg-gray-50 text-gray-800 font-medium rounded-full border border-gray-200 transition-colors duration-200"

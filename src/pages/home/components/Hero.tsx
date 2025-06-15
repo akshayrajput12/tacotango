@@ -20,7 +20,7 @@ export const Hero = () => {
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6"
                 style={{ fontFamily: 'Raleway, sans-serif' }}
               >
-                Crafting Moments, One Cup at a Time
+                Crafting Flavors, One Taco at a Time
               </motion.h1>
               
               <motion.p
@@ -30,7 +30,7 @@ export const Hero = () => {
                 className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 text-white/90 max-w-2xl mx-auto"
                 style={{ fontFamily: 'Lato, sans-serif' }}
               >
-                Welcome to Cafex, where every sip tells a story. Explore our journey, savor our menu, and create unforgettable events.
+                Welcome to TacoTango, where every bite tells a story. Explore our journey, savor our authentic Mexican flavors, and create unforgettable events.
               </motion.p>
               
               <motion.button
@@ -69,7 +69,7 @@ export const Hero = () => {
             className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl"
             style={{ fontFamily: 'Lato, sans-serif' }}
           >
-            From a small dream to a bustling hub, Cafex has been serving the community with passion and dedication. Our journey is filled with stories of friendship, creativity, and the love for exceptional coffee. Discover how we've grown and what makes us unique.
+            From a small dream to a bustling hub, TacoTango has been serving the community with passion and dedication. Our journey is filled with stories of friendship, creativity, and the love for authentic Mexican cuisine. Discover how we've grown and what makes us unique.
           </motion.p>
         </div>
       </div>

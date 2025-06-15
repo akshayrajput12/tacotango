@@ -56,9 +56,9 @@ export const OurStoryHero = () => {
             className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl"
             style={{ fontFamily: 'Lato, sans-serif' }}
           >
-            The Daily Grind was founded in 2010 by Sarah and David, two passionate coffee enthusiasts with a dream of creating a 
-            community hub centered around exceptional coffee and delicious food. Their journey began with a small, cozy space in the 
-            heart of the city, where they meticulously crafted each cup and dish with love and care.
+            TacoTango was founded in 2010 by Maria and Carlos, two passionate Mexican cuisine enthusiasts with a dream of creating a
+            community hub centered around authentic tacos and vibrant flavors. Their journey began with a small, colorful space in the
+            heart of the city, where they meticulously crafted each taco and dish with love and traditional techniques.
           </motion.p>
         </div>
       </div>

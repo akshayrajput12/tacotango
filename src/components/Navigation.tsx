@@ -61,11 +61,11 @@ export const Navigation = () => {
               {/* Logo Image */}
               <img
                 src={logoImage}
-                alt="Cafex Logo"
+                alt="TacoTango Logo"
                 className="w-8 h-8 object-contain"
               />
               <span className="text-lg font-semibold text-gray-900 hover:text-orange-600 transition-colors duration-200" style={{ fontFamily: 'Raleway, sans-serif' }}>
-                Cafex
+                TacoTango
               </span>
             </motion.button>
           </div>

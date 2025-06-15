@@ -111,8 +111,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
               <div className="relative">
                 <img
                   src={logoImage}
-                  alt="Cafex Logo"
-                  className="w-10 h-10 object-contain"
+                  alt="TacoTango Logo"
+                  className="w-14 h-14 object-contain"
                 />
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
               </div>
@@ -121,7 +121,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                   className="text-xl font-bold block"
                   style={{ color: '#96664F', fontFamily: 'Raleway, sans-serif' }}
                 >
-                  Cafex Admin
+                  TacoTango Admin
                 </span>
                 <span className="text-xs text-gray-500" style={{ fontFamily: 'Lato, sans-serif' }}>
                   Management Panel
@@ -313,10 +313,10 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             {/* Version Info */}
             <div className="text-center">
               <p className="text-xs text-gray-500 mb-1" style={{ fontFamily: 'Lato, sans-serif' }}>
-                Cafex Admin Panel v2.1.0
+                TacoTango Admin Panel v2.1.0
               </p>
               <p className="text-xs text-gray-400" style={{ fontFamily: 'Lato, sans-serif' }}>
-                © 2024 Cafex. All rights reserved.
+                © 2024 TacoTango. All rights reserved.
               </p>
             </div>
 

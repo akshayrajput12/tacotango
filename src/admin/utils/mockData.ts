@@ -282,8 +282,8 @@ export const mockInstagramPosts: InstagramPost[] = [
   {
     id: '1',
     image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400',
-    caption: 'Perfect morning vibes ☕️ #CafexMoments',
-    hashtags: ['#coffee', '#morning', '#cafex', '#barista'],
+    caption: 'Perfect morning vibes 🌮 #TacoTangoMoments',
+    hashtags: ['#tacos', '#morning', '#tacotango', '#mexican'],
     status: 'published',
     likes: 245,
     comments: 18
@@ -291,8 +291,8 @@ export const mockInstagramPosts: InstagramPost[] = [
   {
     id: '2',
     image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
-    caption: 'Latte art perfection 🎨 Who can guess the design?',
-    hashtags: ['#latteart', '#coffee', '#art', '#cafex'],
+    caption: 'Taco perfection 🎨 Who can guess the filling?',
+    hashtags: ['#tacoart', '#mexican', '#authentic', '#tacotango'],
     status: 'published',
     likes: 189,
     comments: 23

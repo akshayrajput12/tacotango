@@ -43,8 +43,8 @@ const MissionValues: React.FC = () => {
               className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl"
               style={{ fontFamily: 'Lato, sans-serif' }}
             >
-              At Cafex, our mission is to create an extraordinary coffee experience that brings people together. We are dedicated to
-              serving premium, ethically-sourced coffee in a warm, welcoming environment where every guest feels at home. We believe
+              At TacoTango, our mission is to create an extraordinary Mexican dining experience that brings people together. We are dedicated to
+              serving authentic, fresh Mexican cuisine in a vibrant, welcoming environment where every guest feels at home. We believe
               in building meaningful connections within our community while supporting sustainable practices and local partnerships
               that make a positive impact.
             </motion.p>
@@ -90,7 +90,7 @@ const MissionValues: React.FC = () => {
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Quality</h3>
               </div>
               <p className="text-gray-600 text-sm sm:text-base">
-                We source the finest coffee beans and ingredients, ensuring every cup meets our exceptional standards.
+                We source the finest ingredients and spices, ensuring every taco meets our exceptional standards.
               </p>
             </motion.div>
 
@@ -159,9 +159,9 @@ const MissionValues: React.FC = () => {
               className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl"
               style={{ fontFamily: 'Lato, sans-serif' }}
             >
-              These values guide everything we do at Cafex. From carefully selecting our coffee beans to creating meaningful
+              These values guide everything we do at TacoTango. From carefully selecting our fresh ingredients to creating meaningful
               connections with our guests, we're committed to excellence in every aspect of our business. Together, these principles
-              help us build not just a coffee shop, but a true community hub where quality, connection, and care come together.
+              help us build not just a restaurant, but a true community hub where quality, connection, and care come together.
             </motion.p>
           </div>
         </div>

@@ -59,14 +59,14 @@ export const Login: React.FC = () => {
           <div className="flex items-center space-x-3">
             <img
               src={logoImage}
-              alt="Cafex Logo"
-              className="w-10 h-10 object-contain"
+              alt="TacoTango Logo"
+              className="w-12 h-12 object-contain"
             />
             <span 
               className="text-2xl font-bold"
               style={{ color: '#96664F', fontFamily: 'Raleway, sans-serif' }}
             >
-              Cafex Admin
+              TacoTango Admin
             </span>
           </div>
         </div>
@@ -80,7 +80,7 @@ export const Login: React.FC = () => {
             {isSignUp ? 'Create Admin Account' : 'Sign In to Admin Panel'}
           </h3>
           <p className="text-sm text-gray-600" style={{ fontFamily: 'Lato, sans-serif' }}>
-            {isSignUp ? 'Create a new admin account' : 'Access the Cafex management dashboard'}
+            {isSignUp ? 'Create a new admin account' : 'Access the TacoTango management dashboard'}
           </p>
         </div>
 

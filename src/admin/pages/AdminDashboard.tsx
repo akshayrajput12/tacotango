@@ -102,10 +102,10 @@ export const AdminDashboard: React.FC = () => {
           className="text-2xl font-bold mb-2"
           style={{ color: '#96664F', fontFamily: 'Raleway, sans-serif' }}
         >
-          Welcome to Cafex Admin Panel
+          Welcome to TacoTango Admin Panel
         </h2>
         <p className="text-gray-600" style={{ fontFamily: 'Lato, sans-serif' }}>
-          Manage your cafe's content, bookings, and operations from this central dashboard.
+          Manage your restaurant's content, bookings, and operations from this central dashboard.
         </p>
       </motion.div>
 
